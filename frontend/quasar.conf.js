@@ -14,10 +14,10 @@ module.exports = function (ctx) {
 
     extras: [
       'roboto-font',
+      'fontawesome-v5',
       'material-icons' // optional, you are not bound to it
       // 'ionicons-v4',
       // 'mdi-v3',
-      // 'fontawesome-v5',
       // 'eva-icons'
     ],
 
@@ -57,9 +57,9 @@ module.exports = function (ctx) {
 
     build: {
       scopeHoisting: true,
-      // vueRouterMode: 'history',
+      vueRouterMode: 'history',
+      gzip: true,
       // vueCompiler: true,
-      // gzip: true,
       // analyze: true,
       // extractCSS: false,
       extendWebpack (cfg) {
@@ -89,13 +89,13 @@ module.exports = function (ctx) {
       // workboxPluginMode: 'InjectManifest',
       // workboxOptions: {}, // only for NON InjectManifest
       manifest: {
-        // name: 'Quasar App',
-        // short_name: 'Quasar-PWA',
-        // description: 'Best PWA App in town!',
+        name: 'Shopping Chat',
+        short_name: 'ShoppingChat',
+        description: 'Melhor app de chat!',
         display: 'standalone',
         orientation: 'portrait',
-        background_color: '#ffffff',
-        theme_color: '#027be3',
+        background_color: '#CDCDCD',
+        theme_color: '#006747',
         icons: [
           {
             'src': 'statics/icons/icon-128x128.png',
