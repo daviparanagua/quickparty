@@ -29,7 +29,7 @@ export default {
   data () {
     return {
       right: this.$q.platform.is.desktop
-    }
+    };
   }
-}
+};
 </script>
