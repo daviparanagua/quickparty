@@ -1,30 +1,27 @@
 <template>
   <q-page class="row">
-    <div class="col-xs-9">
-      <div class="column full-height">
-        <div class="col">
-          <chat-messages
-            :messages = "messages"
-          ></chat-messages>
-        </div>
-        <div class="col-auto">
-          <chat-text-box
-            @sendMessage = "sendMessage"
-            :text = "textbox"
-          ></chat-text-box>
-        </div>
+    <div class="col-xs-12" id="chat_container">
+      <div class="q-pa-sm" id="chat_messages">
+        <chat-messages
+          :messages = "messages"
+        ></chat-messages>
+      </div>
+      <div class="q-pa-sm" id="chat_users">
+        <users-list
+          class = "userslist"
+          :users = "users"
+        ></users-list>
       </div>
     </div>
-    <div class="col-xs-3">
-      <users-list
-        :users = "users"
-      ></users-list>
+    <div id="chat_typer">
+      <chat-text-box
+        class = "textarea"
+        @sendMessage = "sendMessage"
+        :text = "textbox"
+      ></chat-text-box>
     </div>
   </q-page>
 </template>
-
-<style>
-</style>
 
 <script>
 import io from 'socket.io-client';
@@ -38,6 +35,216 @@ export default {
     id: 0, // ID do chat
     myName: 'User', // Nome do usuário
     messages: [ // Todas as mensagens do chat
+      {
+        id: 1,
+        sender: 'Davi',
+        body: 'Olá!'
+      },
+      {
+        id: 2,
+        sender: 'Davi',
+        body: 'Tudo bem?'
+      },
+      {
+        id: 3,
+        sender: 'Robô',
+        body: 'Desculpe. Não posso falar no momento.'
+      },
+      {
+        id: 1,
+        sender: 'Davi',
+        body: 'Olá!'
+      },
+      {
+        id: 2,
+        sender: 'Davi',
+        body: 'Tudo bem?'
+      },
+      {
+        id: 3,
+        sender: 'Robô',
+        body: 'Desculpe. Não posso falar no momento.'
+      },
+      {
+        id: 1,
+        sender: 'Davi',
+        body: 'Olá!'
+      },
+      {
+        id: 2,
+        sender: 'Davi',
+        body: 'Tudo bem?'
+      },
+      {
+        id: 3,
+        sender: 'Robô',
+        body: 'Desculpe. Não posso falar no momento.'
+      },
+      {
+        id: 1,
+        sender: 'Davi',
+        body: 'Olá!'
+      },
+      {
+        id: 2,
+        sender: 'Davi',
+        body: 'Tudo bem?'
+      },
+      {
+        id: 3,
+        sender: 'Robô',
+        body: 'Desculpe. Não posso falar no momento.'
+      },
+      {
+        id: 1,
+        sender: 'Davi',
+        body: 'Olá!'
+      },
+      {
+        id: 2,
+        sender: 'Davi',
+        body: 'Tudo bem?'
+      },
+      {
+        id: 3,
+        sender: 'Robô',
+        body: 'Desculpe. Não posso falar no momento.'
+      },
+      {
+        id: 1,
+        sender: 'Davi',
+        body: 'Olá!'
+      },
+      {
+        id: 2,
+        sender: 'Davi',
+        body: 'Tudo bem?'
+      },
+      {
+        id: 3,
+        sender: 'Robô',
+        body: 'Desculpe. Não posso falar no momento.'
+      },
+      {
+        id: 1,
+        sender: 'Davi',
+        body: 'Olá!'
+      },
+      {
+        id: 2,
+        sender: 'Davi',
+        body: 'Tudo bem?'
+      },
+      {
+        id: 3,
+        sender: 'Robô',
+        body: 'Desculpe. Não posso falar no momento.'
+      },
+      {
+        id: 1,
+        sender: 'Davi',
+        body: 'Olá!'
+      },
+      {
+        id: 2,
+        sender: 'Davi',
+        body: 'Tudo bem?'
+      },
+      {
+        id: 3,
+        sender: 'Robô',
+        body: 'Desculpe. Não posso falar no momento.'
+      },
+      {
+        id: 1,
+        sender: 'Davi',
+        body: 'Olá!'
+      },
+      {
+        id: 2,
+        sender: 'Davi',
+        body: 'Tudo bem?'
+      },
+      {
+        id: 3,
+        sender: 'Robô',
+        body: 'Desculpe. Não posso falar no momento.'
+      },
+      {
+        id: 1,
+        sender: 'Davi',
+        body: 'Olá!'
+      },
+      {
+        id: 2,
+        sender: 'Davi',
+        body: 'Tudo bem?'
+      },
+      {
+        id: 3,
+        sender: 'Robô',
+        body: 'Desculpe. Não posso falar no momento.'
+      },
+      {
+        id: 1,
+        sender: 'Davi',
+        body: 'Olá!'
+      },
+      {
+        id: 2,
+        sender: 'Davi',
+        body: 'Tudo bem?'
+      },
+      {
+        id: 3,
+        sender: 'Robô',
+        body: 'Desculpe. Não posso falar no momento.'
+      },
+      {
+        id: 1,
+        sender: 'Davi',
+        body: 'Olá!'
+      },
+      {
+        id: 2,
+        sender: 'Davi',
+        body: 'Tudo bem?'
+      },
+      {
+        id: 3,
+        sender: 'Robô',
+        body: 'Desculpe. Não posso falar no momento.'
+      },
+      {
+        id: 1,
+        sender: 'Davi',
+        body: 'Olá!'
+      },
+      {
+        id: 2,
+        sender: 'Davi',
+        body: 'Tudo bem?'
+      },
+      {
+        id: 3,
+        sender: 'Robô',
+        body: 'Desculpe. Não posso falar no momento.'
+      },
+      {
+        id: 1,
+        sender: 'Davi',
+        body: 'Olá!'
+      },
+      {
+        id: 2,
+        sender: 'Davi',
+        body: 'Tudo bem?'
+      },
+      {
+        id: 3,
+        sender: 'Robô',
+        body: 'Desculpe. Não posso falar no momento.'
+      },
       {
         id: 1,
         sender: 'Davi',
@@ -94,3 +301,27 @@ export default {
   }
 };
 </script>
+<style>
+  #chat_container {
+    height: calc(100vh - 50px - 64px);
+    display: flex;
+  }
+
+  #chat_messages {
+    overflow: auto;
+    background: #CCC;
+    flex-grow: 3;
+  }
+
+  #chat_users {
+    background: #EEE;
+    flex-grow: 1;
+  }
+
+  #chat_typer {
+    position:fixed;
+    bottom:5px;
+    left:5px;
+    width: calc(100% - 10px);
+  }
+</style>
