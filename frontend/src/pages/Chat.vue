@@ -26,6 +26,7 @@
 </style>
 
 <script>
+import io from 'socket.io-client';
 import ChatMessages from 'components/ChatMessages';
 import ChatTextBox from 'components/ChatTextBox';
 import UsersList from 'components/UsersList';
@@ -72,6 +73,18 @@ export default {
     ChatMessages,
     ChatTextBox,
     UsersList
+  },
+  created () {
+    this.socket = io('http://localhost:3000');
+    let socket = this.socket;
+
+    socket.on('connect', () => {
+      console.log('Socket.io conectado');
+    });
+
+    socket.on('system', (message) => {
+      console.log(message);
+    });
   }
 };
 </script>
