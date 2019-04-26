@@ -1,14 +1,24 @@
 <template>
-  <q-page class="flex flex-center">
-    <chat-messages
-      :messages = "messages"
-    ></chat-messages>
-    <users-list
-      :users = "users"
-    ></users-list>
-    <chat-text-box
-      :text = "textbox"
-    ></chat-text-box>
+  <q-page class="row">
+    <div class="col-xs-9">
+      <div class="column full-height">
+        <div class="col">
+          <chat-messages
+            :messages = "messages"
+          ></chat-messages>
+        </div>
+        <div class="col-auto">
+          <chat-text-box
+            :text = "textbox"
+          ></chat-text-box>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-3">
+      <users-list
+        :users = "users"
+      ></users-list>
+    </div>
   </q-page>
 </template>
 
