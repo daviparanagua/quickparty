@@ -9,6 +9,7 @@
         </div>
         <div class="col-auto">
           <chat-text-box
+            @sendMessage = "sendMessage"
             :text = "textbox"
           ></chat-text-box>
         </div>
@@ -85,6 +86,11 @@ export default {
     socket.on('system', (message) => {
       console.log(message);
     });
+  },
+  methods: {
+    sendMessage (message) {
+      console.warn(message);
+    }
   }
 };
 </script>
