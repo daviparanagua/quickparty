@@ -24,7 +24,7 @@
   <q-page class="row items-center justify-center" v-else-if="state == 'profile'">
     <div class="col-xs-8 col-md-6" id="profiler">
       <q-input
-        v-model="username"
+        v-model="form.username"
         label="Nome de usuário"
         hint="Digite um nome de usuário e aperte ENTER"
         @keyup.enter="setUsername"
@@ -43,10 +43,12 @@ export default {
   name: 'Chat',
   data: () => ({
     addr: '',
+    form: {
+      username: ''
+    },
     id: 0, // ID do chat
     myName: 'User', // Nome do usuário
     messages: [], // Todas as mensagens do chat,
-    username: '',
     state: 'loading',
     users: [ // Todos os participantes do chat
       {
@@ -64,6 +66,11 @@ export default {
     ],
     textbox: '' // Texto da caixa de digitação
   }),
+  computed: {
+    username: {
+      get: function () { return this.$store.state.user.username; }
+    }
+  },
   components: {
     ChatMessages,
     ChatTextBox,
@@ -78,14 +85,21 @@ export default {
       });
     },
     setUsername () {
-      if (this.username) {
+      let newUsername = this.form.username;
+      console.log(newUsername);
+      if (newUsername) {
         this.state = 'active';
+        this.$store.dispatch('setUserData', { username: newUsername });
       }
     }
   },
   created () {
     // Verificação do perfil
     this.state = 'profile';
+
+    // Recuperar dados de usuário salvos em localStorage
+    this.$store.dispatch('setUserData', {}); // Disparar o evento fazio fará com que o action restaure o localStorage sem alterações
+    if (this.$store.state.user.username) this.state = 'active'; // Já tendo nome de usuário, prosseguir
 
     // Chat solicitado
     this.addr = `/${this.$route.params.chatAddr}`;
@@ -110,7 +124,7 @@ export default {
      * Tudo ok?
      */
     socket.on('connect', () => {
-      console.log('Socket.io conectado');
+      // console.log('Socket.io conectado');
     });
 
     /**
