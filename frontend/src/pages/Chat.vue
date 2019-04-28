@@ -63,16 +63,23 @@ export default {
   },
   created () {
     // Chat solicitado
-    let addr = this.$route.params.chatAddr;
+    let addr = `/${this.$route.params.chatAddr}`;
 
     // Título da janela
-    this.$store.commit('setTitle', `/${addr}`);
+    this.$store.commit('setTitle', addr);
 
     /**
      * Conectar socket
      */
     this.socket = io('http://localhost:3000');
     let socket = this.socket;
+
+    /**
+     * Entrar na sala
+     */
+    socket.emit('join-request', {
+      addr
+    });
 
     /**
      * Tudo ok?
