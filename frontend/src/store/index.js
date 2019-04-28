@@ -20,6 +20,7 @@ export default function (/* { ssrContext } */) {
       setTitle (state, payload) {
         console.log(payload);
         state.windowTitle = payload;
+        window.document.title = `Multichat ${state.windowTitle}`;
       }
     },
     modules: {
