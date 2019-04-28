@@ -49,7 +49,7 @@ export default {
     id: 0, // ID do chat
     myName: 'User', // Nome do usuário
     messages: [], // Todas as mensagens do chat,
-    state: 'loading',
+    loading: true,
     users: [ // Todos os participantes do chat
       {
         name: 'Isto',
@@ -69,6 +69,11 @@ export default {
   computed: {
     username: {
       get: function () { return this.$store.state.user.username; }
+    },
+    state () {
+      if (!this.$store.state.user.username) return 'profile';
+      if (this.loading) return 'loading';
+      return 'active';
     }
   },
   components: {
@@ -88,18 +93,13 @@ export default {
       let newUsername = this.form.username;
       console.log(newUsername);
       if (newUsername) {
-        this.state = 'active';
         this.$store.dispatch('setUserData', { username: newUsername });
       }
     }
   },
   created () {
-    // Verificação do perfil
-    this.state = 'profile';
-
     // Recuperar dados de usuário salvos em localStorage
     this.$store.dispatch('setUserData', {}); // Disparar o evento fazio fará com que o action restaure o localStorage sem alterações
-    if (this.$store.state.user.username) this.state = 'active'; // Já tendo nome de usuário, prosseguir
 
     // Chat solicitado
     this.addr = `/${this.$route.params.chatAddr}`;
@@ -114,17 +114,18 @@ export default {
     let socket = this.socket;
 
     /**
-     * Entrar na sala
-     */
-    socket.emit('join-request', {
-      addr: this.addr
-    });
-
-    /**
      * Tudo ok?
      */
     socket.on('connect', () => {
       // console.log('Socket.io conectado');
+      this.loading = false;
+    });
+
+    /**
+     * Entrar na sala
+     */
+    socket.emit('join-request', {
+      addr: this.addr
     });
 
     /**
