@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div class="system q-px-sm q-py-xs" v-if="message.type == 'system'">
+    {{message.body}}
+  </div>
+  <div v-else>
     {{message.sender}}: {{message.body}}
   </div>
 </template>
@@ -11,5 +14,8 @@ export default {
 </script>
 
 <style>
-
+.system {
+  background: #AAA;
+  font-style: italic;
+}
 </style>

@@ -1,7 +1,7 @@
 <template>
   <q-page class="row">
     <div class="col-xs-12" id="chat_container">
-      <div class="q-pa-sm" id="chat_messages">
+      <div id="chat_messages">
         <chat-messages
           :messages = "messages"
         ></chat-messages>
@@ -34,34 +34,18 @@ export default {
   data: () => ({
     id: 0, // ID do chat
     myName: 'User', // Nome do usuário
-    messages: [ // Todas as mensagens do chat
+    messages: [], // Todas as mensagens do chat,
+    users: [ // Todos os participantes do chat
       {
-        id: 1,
-        sender: 'Davi',
-        body: 'Olá!'
-      },
-      {
-        id: 2,
-        sender: 'Davi',
-        body: 'Tudo bem?'
-      },
-      {
-        id: 3,
-        sender: 'Robô',
-        body: 'Desculpe. Não posso falar no momento.'
-      }
-    ],
-    users: [ // Todas as mensagens do chat
-      {
-        name: 'Davi',
+        name: 'Isto',
         status: 'online'
       },
       {
-        name: 'Robô',
+        name: 'não está',
         status: 'online'
       },
       {
-        name: 'Daniel',
+        name: 'implantado (offline)',
         status: 'offline'
       }
     ],
@@ -98,9 +82,18 @@ export default {
     });
 
     /**
-     * Recebendo eventos?
+     * SM: System Message
      */
-    socket.on('system', (message) => {
+    socket.on('sm', (message) => {
+      this.messages.push(Object.assign(message, {
+        type: 'system'
+      }));
+    });
+
+    /**
+     * UM: User Message
+     */
+    socket.on('um', (message) => {
       console.log(message);
     });
   }
