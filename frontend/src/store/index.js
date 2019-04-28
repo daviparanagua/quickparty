@@ -12,6 +12,16 @@ Vue.use(Vuex);
 
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
+
+    state: {
+      windowTitle: 'MultiChat'
+    },
+    mutations: {
+      setTitle (state, payload) {
+        console.log(payload);
+        state.windowTitle = payload;
+      }
+    },
     modules: {
       // example
     },

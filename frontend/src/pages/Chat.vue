@@ -282,22 +282,34 @@ export default {
     ChatTextBox,
     UsersList
   },
-  created () {
-    this.socket = io('http://localhost:3000');
-    let socket = this.socket;
-
-    socket.on('connect', () => {
-      console.log('Socket.io conectado');
-    });
-
-    socket.on('system', (message) => {
-      console.log(message);
-    });
-  },
   methods: {
     sendMessage (message) {
       console.warn(message);
     }
+  },
+  created () {
+    // Título da janela
+    this.$store.commit('setTitle', 'Chat');
+
+    /**
+     * Conectar socket
+     */
+    this.socket = io('http://localhost:3000');
+    let socket = this.socket;
+
+    /**
+     * Tudo ok?
+     */
+    socket.on('connect', () => {
+      console.log('Socket.io conectado');
+    });
+
+    /**
+     * Recebendo eventos?
+     */
+    socket.on('system', (message) => {
+      console.log(message);
+    });
   }
 };
 </script>

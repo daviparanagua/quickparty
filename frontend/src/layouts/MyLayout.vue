@@ -6,7 +6,7 @@
           <q-avatar>
             <img src="https://cdn.quasar-framework.org/logo/svg/quasar-logo.svg">
           </q-avatar>
-          Title
+          {{windowTitle}}
         </q-toolbar-title>
 
         <q-btn dense flat round icon="menu" @click="right = !right" />
@@ -30,6 +30,11 @@ export default {
     return {
       right: this.$q.platform.is.desktop
     };
+  },
+  computed: {
+    windowTitle () {
+      return this.$store.state.windowTitle;
+    }
   }
 };
 </script>
