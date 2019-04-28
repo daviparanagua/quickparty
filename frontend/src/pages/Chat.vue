@@ -1,5 +1,5 @@
 <template>
-  <q-page class="row">
+  <q-page class="row" v-if="state == 'active'">
     <div class="col-xs-12" id="chat_container">
       <div id="chat_messages">
         <chat-messages
@@ -21,6 +21,16 @@
       ></chat-text-box>
     </div>
   </q-page>
+  <q-page class="row items-center justify-center" v-else-if="state == 'profile'">
+    <div class="col-xs-8 col-md-6" id="profiler">
+      <q-input
+        v-model="username"
+        label="Nome de usuário"
+        hint="Digite um nome de usuário e aperte ENTER"
+        @keyup.enter="setUsername"
+      ></q-input>
+    </div>
+  </q-page>
 </template>
 
 <script>
@@ -36,6 +46,8 @@ export default {
     id: 0, // ID do chat
     myName: 'User', // Nome do usuário
     messages: [], // Todas as mensagens do chat,
+    username: '',
+    state: 'loading',
     users: [ // Todos os participantes do chat
       {
         name: 'Isto',
@@ -60,13 +72,21 @@ export default {
   methods: {
     sendMessage (message) {
       this.socket.emit('um', {
-        sender: 'Usuario',
+        sender: this.username,
         room: this.addr,
         body: message
       });
+    },
+    setUsername () {
+      if (this.username) {
+        this.state = 'active';
+      }
     }
   },
   created () {
+    // Verificação do perfil
+    this.state = 'profile';
+
     // Chat solicitado
     this.addr = `/${this.$route.params.chatAddr}`;
 
