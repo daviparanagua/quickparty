@@ -3,11 +3,13 @@ module.exports = function(io){
 
     console.log('Usuário conectado');
 
-    // Mensagem de boas-vindas
-    socket.emit('um', {
-      type: 'system',
+    /**
+     * Mensagem de boas-vindas
+     */
+    socket.emit('sm', { // SM: System Message      
       body: 'Bem-vindo(a)!'
     })
+
 
   });
 }
