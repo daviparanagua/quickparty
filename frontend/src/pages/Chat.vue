@@ -32,6 +32,7 @@ import UsersList from 'components/UsersList';
 export default {
   name: 'Chat',
   data: () => ({
+    addr: '',
     id: 0, // ID do chat
     myName: 'User', // Nome do usuário
     messages: [], // Todas as mensagens do chat,
@@ -58,15 +59,19 @@ export default {
   },
   methods: {
     sendMessage (message) {
-      console.warn(message);
+      this.socket.emit('um', {
+        sender: 'Usuario',
+        room: this.addr,
+        body: message
+      });
     }
   },
   created () {
     // Chat solicitado
-    let addr = `/${this.$route.params.chatAddr}`;
+    this.addr = `/${this.$route.params.chatAddr}`;
 
     // Título da janela
-    this.$store.commit('setTitle', addr);
+    this.$store.commit('setTitle', this.addr);
 
     /**
      * Conectar socket
@@ -78,7 +83,7 @@ export default {
      * Entrar na sala
      */
     socket.emit('join-request', {
-      addr
+      addr: this.addr
     });
 
     /**
@@ -101,7 +106,9 @@ export default {
      * UM: User Message
      */
     socket.on('um', (message) => {
-      console.log(message);
+      this.messages.push(Object.assign(message, {
+        type: 'user'
+      }));
     });
   }
 };
@@ -114,7 +121,7 @@ export default {
 
   #chat_messages {
     overflow: auto;
-    background: #CCC;
+    background: #DFDFDF;
     flex-grow: 3;
   }
 

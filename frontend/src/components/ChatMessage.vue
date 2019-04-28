@@ -2,7 +2,7 @@
   <div class="system q-px-sm q-py-xs" v-if="message.type == 'system'">
     {{message.body}}
   </div>
-  <div v-else>
+  <div class="user q-px-sm q-py-xs" v-else-if="message.type == 'user'">
     {{message.sender}}: {{message.body}}
   </div>
 </template>
