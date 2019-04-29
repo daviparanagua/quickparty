@@ -133,11 +133,9 @@ export default {
     /**
      * Log de mensagens recebido
      */
-    socket.on('um_log', (payload) => {
+    socket.on('msg_log', (payload) => {
       for (let message of payload) {
-        this.messages.push(Object.assign(message, {
-          type: 'user'
-        }));
+        this.messages.push(message);
       }
     });
 
@@ -145,18 +143,14 @@ export default {
      * SM: System Message: Mensagem do sistema
      */
     socket.on('sm', (message) => {
-      this.messages.push(Object.assign(message, {
-        type: 'system'
-      }));
+      this.messages.push(message);
     });
 
     /**
      * UM: User Message: Mensagem de usuário
      */
     socket.on('um', (message) => {
-      this.messages.push(Object.assign(message, {
-        type: 'user'
-      }));
+      this.messages.push(message);
     });
 
     /**
