@@ -93,6 +93,13 @@ export default {
         addr: this.addr,
         user: this.$store.state.user
       });
+    },
+    addMessage (message) {
+      this.messages.push(message);
+      this.$nextTick(() => {
+        let container = this.$el.querySelector('#chat_messages');
+        container.scrollTop = container.scrollHeight;
+      });
     }
   },
   created () {
@@ -135,7 +142,7 @@ export default {
      */
     socket.on('msg_log', (payload) => {
       for (let message of payload) {
-        this.messages.push(message);
+        this.addMessage(message);
       }
     });
 
@@ -143,14 +150,14 @@ export default {
      * SM: System Message: Mensagem do sistema
      */
     socket.on('sm', (message) => {
-      this.messages.push(message);
+      this.addMessage(message);
     });
 
     /**
      * UM: User Message: Mensagem de usuário
      */
     socket.on('um', (message) => {
-      this.messages.push(message);
+      this.addMessage(message);
     });
 
     /**
