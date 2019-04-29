@@ -84,7 +84,11 @@ export default {
       }
     },
     changeUsername (newUsername) {
-      console.warn(newUsername);
+      // Não disparar o evento caso não haja mudança
+      if (newUsername === this.username) {
+        return false;
+      }
+
       this.$store.dispatch('setUserData', { username: newUsername });
       this.socket.emit('userDataEdit', { user: this.$store.state.user });
     },
