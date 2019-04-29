@@ -4,7 +4,7 @@
       <q-toolbar>
         <q-toolbar-title>
           <q-avatar>
-            <img src="https://cdn.quasar-framework.org/logo/svg/quasar-logo.svg">
+            <img src="/statics/logo.png">
           </q-avatar>
           {{windowTitle}}
         </q-toolbar-title>
