@@ -32,7 +32,7 @@ module.exports = function(io){
       socket.emit('join-accepted', { addr: payload.addr });
 
       // Notificar demais participantes
-      socket.to(roomId).emit('sm',{body: users[socket.id].user.username + ' entrou da sala'});
+      socket.to(roomId).emit('sm',{body: users[socket.id].user.username + ' entrou na sala'});
       io.in(socket.currentRoom).emit('users', getUsers(socket.currentRoom));
     });
 
