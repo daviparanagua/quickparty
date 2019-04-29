@@ -1,6 +1,6 @@
 <template>
   <div @click="edit = true" class="myself text-primary">
-    {{user.user.username}}
+    {{username}}
   </div>
 </template>
 
@@ -10,7 +10,9 @@ export default {
     edit: false
   }),
   computed: {
-
+    username () {
+      return this.user ? this.user.user.username : '';
+    }
   },
   props: ['user', 'myself']
 };
