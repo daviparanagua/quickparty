@@ -9,19 +9,19 @@ module.exports = function(io){
     users[socket.id] = {id: socket.id};
 
     /**
-     * Mensagem de boas-vindas
-     */
-    socket.emit('sm', { // SM: System Message      
-      body: 'Bem-vindo(a)!'
-    })
-
-    /**
      * join-request: Solicitação de entrada em sala
      * 
      * addr Endereço da sala
      */
     socket.on('join-request', function (payload) {
-      rooms[payload.addr] = {addr: payload.addr};
+      // Cria a sala, se ela não existir
+      if(!rooms[payload.addr]){
+        rooms[payload.addr] = {
+          addr: payload.addr,
+          messages: []
+        };
+      }
+
       socket.currentRoom = payload.addr;
 
       // Atualizar dados do usuário
@@ -30,6 +30,9 @@ module.exports = function(io){
       // Entrar
       socket.join(payload.addr);
       socket.emit('join-accepted', { addr: payload.addr });
+
+      // Enviar mensagens antigas
+      socket.emit('um_log', rooms[payload.addr].messages);
 
       // Notificar demais participantes
       socket.to(roomId).emit('sm',{body: users[socket.id].user.username + ' entrou na sala'});
@@ -47,6 +50,9 @@ module.exports = function(io){
       let responsePayload = Object.assign(payload, {
         socket: socket.id
       });
+
+      // Cria histórico de mensagens
+      rooms[socket.currentRoom].messages.push(payload);
 
       socket.to(payload.room).emit('um', responsePayload);
       socket.emit('um', responsePayload);

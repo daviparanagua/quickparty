@@ -121,7 +121,18 @@ export default {
      * Entrada na sala autorizada
      */
     socket.on('join-accepted', (payload) => {
-      setTimeout(() => this.socket.emit('users', { }), 200);
+      this.socket.emit('users');
+    });
+
+    /**
+     * Log de mensagens recebido
+     */
+    socket.on('um_log', (payload) => {
+      for (let message of payload) {
+        this.messages.push(Object.assign(message, {
+          type: 'user'
+        }));
+      }
     });
 
     /**
