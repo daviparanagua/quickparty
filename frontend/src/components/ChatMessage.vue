@@ -1,15 +1,26 @@
 <template>
-  <div class="system q-px-sm q-py-xs" v-if="message.type == 'system'">
+  <div class="message system q-px-sm q-py-xs" v-if="message.type == 'system'">
     {{message.body}}
+    <div class="time">
+      {{printableTime}}
+    </div>
   </div>
-  <div class="user q-px-sm q-py-xs" v-else-if="message.type == 'user'">
+  <div class="message user q-px-sm q-py-xs" v-else-if="message.type == 'user'">
     {{message.sender}}: {{message.body}}
+    <div class="time">
+      {{printableTime}}
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['message']
+  props: ['message'],
+  computed: {
+    printableTime () {
+      return new Date(this.message.timestamp).toLocaleString();
+    }
+  }
 };
 </script>
 
@@ -17,5 +28,15 @@ export default {
 .system {
   background: #AAA;
   font-style: italic;
+}
+
+.message:hover .time{
+  display:block;
+}
+
+.message .time {
+  display: none;
+  font-size: 0.8em;
+  color: #666;
 }
 </style>

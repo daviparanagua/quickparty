@@ -138,7 +138,8 @@ module.exports = function(io){
     function saveAndEmitMessage(roomAddr, payload, type = 'user') {
       let responsePayload = Object.assign(payload, {
         socket: socket.id,
-        type: TYPES[type].clientType
+        type: TYPES[type].clientType,
+        timestamp: Date.now()
       });
 
       // Cria histórico de mensagens
