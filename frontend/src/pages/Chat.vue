@@ -82,7 +82,17 @@ export default {
       if (newUsername) {
         this.$store.dispatch('setUserData', { username: newUsername });
         this.socket.emit('userData', { user: this.$store.state.user });
+        this.joinRoom();
       }
+    },
+    joinRoom () {
+      /**
+       * Entrar na sala
+       */
+      this.socket.emit('join-request', {
+        addr: this.addr,
+        user: this.$store.state.user
+      });
     }
   },
   created () {
@@ -101,21 +111,17 @@ export default {
     this.socket = io('http://localhost:3000');
     let socket = this.socket;
 
-    /**
-     * Tudo ok?
-     */
+    // Tudo ok?
     socket.on('connect', () => {
-      // console.log('Socket.io conectado');
       this.loading = false;
     });
 
-    /**
-     * Entrar na sala
-     */
-    socket.emit('join-request', {
-      addr: this.addr,
-      user: this.$store.state.user
-    });
+    // Se já é conhecido, pode iniciar
+    if (this.username) {
+      this.joinRoom();
+    }
+
+    // ### Eventos ###
 
     /**
      * Entrada na sala autorizada
