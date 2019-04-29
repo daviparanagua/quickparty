@@ -107,7 +107,7 @@ export default {
     this.$store.dispatch('setUserData', {}); // Disparar o evento fazio fará com que o action restaure o localStorage sem alterações
 
     // Chat solicitado
-    this.addr = `/${this.$route.params.chatAddr}`;
+    this.addr = `/${this.$route.params.chatAddr || ''}`;
 
     // Título da janela
     this.$store.commit('setTitle', this.addr);
