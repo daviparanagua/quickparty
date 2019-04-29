@@ -1,6 +1,6 @@
 <template>
   <div>
-    {{user.name}}
+    {{user.user.username}}
   </div>
 </template>
 

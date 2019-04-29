@@ -50,20 +50,7 @@ export default {
     myName: 'User', // Nome do usuário
     messages: [], // Todas as mensagens do chat,
     loading: true,
-    users: [ // Todos os participantes do chat
-      {
-        name: 'Isto',
-        status: 'online'
-      },
-      {
-        name: 'não está',
-        status: 'online'
-      },
-      {
-        name: 'implantado (offline)',
-        status: 'offline'
-      }
-    ],
+    users: [], // Todos os participantes do chat
     textbox: '' // Texto da caixa de digitação
   }),
   computed: {
@@ -94,6 +81,7 @@ export default {
       console.log(newUsername);
       if (newUsername) {
         this.$store.dispatch('setUserData', { username: newUsername });
+        this.socket.emit('userData', { user: this.$store.state.user });
       }
     }
   },
@@ -125,11 +113,19 @@ export default {
      * Entrar na sala
      */
     socket.emit('join-request', {
-      addr: this.addr
+      addr: this.addr,
+      user: this.$store.state.user
     });
 
     /**
-     * SM: System Message
+     * Entrada na sala autorizada
+     */
+    socket.on('join-accepted', (payload) => {
+      setTimeout(() => this.socket.emit('users', { }), 200);
+    });
+
+    /**
+     * SM: System Message: Mensagem do sistema
      */
     socket.on('sm', (message) => {
       this.messages.push(Object.assign(message, {
@@ -138,12 +134,24 @@ export default {
     });
 
     /**
-     * UM: User Message
+     * UM: User Message: Mensagem de usuário
      */
     socket.on('um', (message) => {
       this.messages.push(Object.assign(message, {
         type: 'user'
       }));
+    });
+
+    /**
+     * USERS: Lista de usuários na sala
+     */
+    socket.on('users', (users) => {
+      let orderedUsers = (users.sort((a, b) => {
+        if (a.user.username < b.user.username) { return -1; };
+        if (a.user.username > b.user.username) { return 1; };
+        return 0;
+      }));
+      this.users = orderedUsers;
     });
   }
 };
