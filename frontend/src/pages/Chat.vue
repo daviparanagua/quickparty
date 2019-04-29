@@ -17,7 +17,6 @@
       <chat-text-box
         class = "textarea"
         @sendMessage = "sendMessage"
-        :text = "textbox"
       ></chat-text-box>
     </div>
   </q-page>
@@ -46,12 +45,9 @@ export default {
     form: {
       username: ''
     },
-    id: 0, // ID do chat
-    myName: 'User', // Nome do usuário
-    messages: [], // Todas as mensagens do chat,
-    loading: true,
-    users: [], // Todos os participantes do chat
-    textbox: '' // Texto da caixa de digitação
+    messages: [], // Todas as mensagens do chat
+    loading: true, // Chat ainda está carregando
+    users: [] // Todos os participantes do chat
   }),
   computed: {
     username: {
