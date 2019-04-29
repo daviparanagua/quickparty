@@ -35,7 +35,7 @@ module.exports = function(io){
       socket.emit('um_log', rooms[payload.addr].messages);
 
       // Notificar demais participantes
-      socket.to(roomId).emit('sm',{body: users[socket.id].user.username + ' entrou na sala'});
+      socket.to(socket.currentRoom).emit('sm',{body: users[socket.id].user.username + ' entrou na sala'});
       io.in(socket.currentRoom).emit('users', getUsers(socket.currentRoom));
     });
 
