@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import uuid from 'uuid/v4';
 
 // import example from './module-example'
 
@@ -28,10 +29,13 @@ export default function (/* { ssrContext } */) {
     },
     actions: {
       setUserData (context, payload) {
-        let localUserData = JSON.parse(localStorage.getItem('user') || '{}');
-        Object.assign(localUserData, payload);
-        localStorage.setItem('user', JSON.stringify(localUserData));
-        context.commit('setUserData', localUserData);
+        let localUserData = JSON.parse(localStorage.getItem('user') || '{}'); // Obter dados do usuário do localStorage
+        Object.assign(localUserData, payload); // Anexar/Substituir dados do usuário conforme payload
+
+        localUserData.uuid = localUserData.uuid || uuid();
+
+        localStorage.setItem('user', JSON.stringify(localUserData)); // Salvar valores alterados no localStorage
+        context.commit('setUserData', localUserData); // Inserir valores no state
       }
     },
     modules: {
