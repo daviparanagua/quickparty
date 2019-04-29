@@ -1,9 +1,10 @@
 <template>
   <q-page class="row" v-if="state == 'active'">
     <div class="col-xs-12" id="chat_container">
-      <div id="chat_messages">
+      <div id="chat_messages" class="q-pa-md">
         <chat-messages
           :messages = "messages"
+          :socketId = "socketId"
         ></chat-messages>
       </div>
       <div class="q-pa-sm" id="chat_users">
@@ -190,7 +191,7 @@ export default {
 
   #chat_messages {
     overflow: auto;
-    background: #DFDFDF;
+    background: #FFF;
     flex-grow: 3;
   }
 

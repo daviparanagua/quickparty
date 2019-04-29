@@ -1,3 +1,5 @@
+const uuid = require('uuid/v4');
+
 module.exports = function(io){
 
   const TYPES = {
@@ -137,10 +139,14 @@ module.exports = function(io){
      */
     function saveAndEmitMessage(roomAddr, payload, type = 'user') {
       let responsePayload = Object.assign(payload, {
-        socket: socket.id,
         type: TYPES[type].clientType,
-        timestamp: Date.now()
+        timestamp: Date.now(),
+        id: uuid()
       });
+
+      if(type === 'user'){
+        responsePayload.socket = socket.id;
+      }
 
       // Cria histórico de mensagens
       if(TYPES[type].saveInHistory){

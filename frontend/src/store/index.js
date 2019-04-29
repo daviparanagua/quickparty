@@ -32,6 +32,8 @@ export default function (/* { ssrContext } */) {
         let localUserData = JSON.parse(localStorage.getItem('user') || '{}'); // Obter dados do usuário do localStorage
         Object.assign(localUserData, payload); // Anexar/Substituir dados do usuário conforme payload
 
+        console.log(payload);
+
         localUserData.uuid = localUserData.uuid || uuid();
 
         localStorage.setItem('user', JSON.stringify(localUserData)); // Salvar valores alterados no localStorage

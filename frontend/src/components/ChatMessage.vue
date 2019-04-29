@@ -1,16 +1,17 @@
 <template>
   <div class="message system q-px-sm q-py-xs" v-if="message.type == 'system'">
-    {{message.body}}
+      {{message.body}}
     <div class="time">
       {{printableTime}}
     </div>
   </div>
-  <div class="message user q-px-sm q-py-xs" v-else-if="message.type == 'user'">
-    {{message.sender}}: {{message.body}}
-    <div class="time">
-      {{printableTime}}
-    </div>
-  </div>
+  <q-chat-message
+    v-else
+    :name="message.sender"
+    :text="message.messages"
+    :stamp="printableTime"
+    :sent="message.sent"
+  />
 </template>
 
 <script>
@@ -26,7 +27,7 @@ export default {
 
 <style>
 .system {
-  background: #AAA;
+  background: #EEE;
   font-style: italic;
 }
 
