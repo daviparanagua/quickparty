@@ -11,6 +11,7 @@
           class = "userslist"
           :users = "users"
           :my-id = "socketId"
+          @changeUsername="changeUsername"
         ></users-list>
       </div>
     </div>
@@ -76,12 +77,16 @@ export default {
     },
     setUsername () {
       let newUsername = this.form.username;
-      console.log(newUsername);
       if (newUsername) {
         this.$store.dispatch('setUserData', { username: newUsername });
         this.socket.emit('userData', { user: this.$store.state.user });
         this.joinRoom();
       }
+    },
+    changeUsername (newUsername) {
+      console.warn(newUsername);
+      this.$store.dispatch('setUserData', { username: newUsername });
+      this.socket.emit('userDataEdit', { user: this.$store.state.user });
     },
     joinRoom () {
       /**

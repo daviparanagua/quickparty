@@ -49,7 +49,7 @@ module.exports = function(io){
 
       // Notificar demais participantes      
       sendSystemMessage(socket.currentRoom, users[socket.id].user.username + ' entrou na sala');
-      io.in(socket.currentRoom).emit('users', getUsers(socket.currentRoom));
+      sendUserList(socket.currentRoom);
     });
 
     /**
@@ -70,6 +70,19 @@ module.exports = function(io){
      */
     socket.on('userData', function (payload) {
       setUserData(socket.id, payload.user);
+    });
+
+    /**
+     * userDataEdit: Dados de usuário editados enquanto ele está uma sala
+     * 
+     * user
+     */
+    socket.on('userDataEdit', function (payload) {
+      sendSystemMessage(socket.currentRoom, users[socket.id].user.username + ' mudou seu nome para ' + payload.user.username);
+      console.log(payload);
+      setUserData(socket.id, payload.user);
+      sendUserList(socket.currentRoom);
+      
     });
 
      /**
@@ -158,6 +171,15 @@ module.exports = function(io){
      */
     function getUsers(room){      
       return Object.keys(socket.adapter.rooms[room].sockets).map((socketId) => users[socketId] );
+    }
+    
+    /**
+     * Envia aos participantes de uma sala a lista atualizada de participantes
+     * 
+     * @param {*} room 
+     */
+    function sendUserList(room){
+      io.in(room).emit('users', getUsers(room));
     }
 
   });
