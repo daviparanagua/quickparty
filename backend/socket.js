@@ -79,10 +79,8 @@ module.exports = function(io){
      */
     socket.on('userDataEdit', function (payload) {
       sendSystemMessage(socket.currentRoom, users[socket.id].user.username + ' mudou seu nome para ' + payload.user.username);
-      console.log(payload);
       setUserData(socket.id, payload.user);
       sendUserList(socket.currentRoom);
-      
     });
 
      /**
