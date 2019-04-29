@@ -4,6 +4,7 @@
       v-for = "user in users"
       :key = "user.id"
       :user = "user"
+      :myself = "user.id == myId"
       ></user>
   </div>
 </template>
@@ -12,7 +13,7 @@
 import User from './User';
 
 export default {
-  props: ['users'],
+  props: ['users', 'my-id'],
   components: {
     User
   }

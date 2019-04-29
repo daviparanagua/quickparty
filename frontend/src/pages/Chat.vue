@@ -10,6 +10,7 @@
         <users-list
           class = "userslist"
           :users = "users"
+          :my-id = "socketId"
         ></users-list>
       </div>
     </div>
@@ -47,6 +48,7 @@ export default {
     },
     messages: [], // Todas as mensagens do chat
     loading: true, // Chat ainda está carregando
+    socketId: '', // ID do Socket
     users: [] // Todos os participantes do chat
   }),
   computed: {
@@ -116,6 +118,7 @@ export default {
 
     // Tudo ok?
     socket.on('connect', () => {
+      this.socketId = socket.io.engine.id;
       this.loading = false;
     });
 

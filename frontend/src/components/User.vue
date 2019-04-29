@@ -1,15 +1,17 @@
 <template>
-  <div>
+  <div :class="{'myself': myself, 'text-primary': myself}">
     {{user.user.username}}
   </div>
 </template>
 
 <script>
 export default {
-  props: ['user']
+  props: ['user', 'myself']
 };
 </script>
 
 <style>
-
+  .myself {
+    font-weight: bold;
+  }
 </style>
