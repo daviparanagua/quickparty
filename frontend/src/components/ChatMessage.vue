@@ -11,6 +11,8 @@
     :text="message.messages"
     :stamp="printableTime"
     :sent="message.sent"
+    name-sanitize
+    text-sanitize
   />
 </template>
 
