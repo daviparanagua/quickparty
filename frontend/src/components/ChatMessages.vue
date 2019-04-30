@@ -32,10 +32,7 @@ export default {
         if (!lastMessage) {
           lastMessage = message;
           lastMessage.messages = [message.body];
-          if (remainingMessages >= 0) { continue; }
-        }
-
-        if (message.type === 'user' && message.socket === lastMessage.socket) {
+        } else if (message.type === 'user' && message.socket === lastMessage.socket) {
           lastMessage.messages.push(message.body);
           lastMessage.timestamp = message.timestamp;
           lastMessage.id = lastMessage.id + message.id;
@@ -46,7 +43,7 @@ export default {
           lastMessage.messages = [message.body];
         }
 
-        if (remainingMessages <= 0) {
+        if (remainingMessages === 0) {
           processedMessages.push(lastMessage);
         }
       }
