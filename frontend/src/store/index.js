@@ -16,27 +16,34 @@ export default function (/* { ssrContext } */) {
 
     state: {
       user: {},
-      windowTitle: 'MultiChat'
+      windowTitle: 'MultiChat',
+      chatHistory: {}
     },
     mutations: {
+      initialiseStore (state) {
+        // Check if the ID exists
+        if (localStorage.getItem('store')) {
+          // Replace the state object with the stored item
+          this.replaceState(
+            Object.assign(state, JSON.parse(localStorage.getItem('store')))
+          );
+        }
+      },
       setTitle (state, payload) {
         state.windowTitle = payload;
         window.document.title = `Multichat ${state.windowTitle}`;
       },
       setUserData (state, payload) {
         state.user = payload;
+      },
+      addToChatHistory (state, payload) {
+        state.chatHistory[payload] = true;
       }
     },
     actions: {
       setUserData (context, payload) {
-        let localUserData = JSON.parse(localStorage.getItem('user') || '{}'); // Obter dados do usuário do localStorage
-        Object.assign(localUserData, payload); // Anexar/Substituir dados do usuário conforme payload
-
-        console.log(payload);
-
-        localUserData.uuid = localUserData.uuid || uuid();
-
-        localStorage.setItem('user', JSON.stringify(localUserData)); // Salvar valores alterados no localStorage
+        let localUserData = context.state.user;
+        localUserData = Object.assign({}, localUserData, payload); // Anexar/Substituir dados do usuário conforme payload
         context.commit('setUserData', localUserData); // Inserir valores no state
       }
     },
@@ -48,6 +55,18 @@ export default function (/* { ssrContext } */) {
     // for dev mode only
     strict: process.env.DEV
   });
+
+  Store.commit('initialiseStore');
+
+  // Subscribe to store updates
+  Store.subscribe((mutation, state) => {
+    // Store the state object as a JSON string
+    localStorage.setItem('store', JSON.stringify(state));
+  });
+
+  if (!Store.state.user.uuid) {
+    Store.commit('setUserData', { uuid: uuid() });
+  }
 
   return Store;
 }
