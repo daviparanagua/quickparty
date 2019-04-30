@@ -25,14 +25,14 @@ export default {
       for (let message of this.messages) {
         remainingMessages--;
 
-        if (message.socket === this.socketId) {
+        if (message.userId === this.$store.state.user.uuid) {
           message.sent = true;
         }
 
         if (!lastMessage) {
           lastMessage = message;
           lastMessage.messages = [message.body];
-        } else if (message.type === 'user' && message.socket === lastMessage.socket) {
+        } else if (message.type === 'user' && message.userId === lastMessage.userId) {
           lastMessage.messages.push(message.body);
           lastMessage.timestamp = message.timestamp;
           lastMessage.id = lastMessage.id + message.id;

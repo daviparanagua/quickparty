@@ -144,8 +144,9 @@ module.exports = function(io){
         id: uuid()
       });
 
+      // Adiciona o ID de usuário a mensagens do usuário
       if(type === 'user'){
-        responsePayload.socket = socket.id;
+        responsePayload.userId = users[socket.id].user.uuid;
       }
 
       // Cria histórico de mensagens
