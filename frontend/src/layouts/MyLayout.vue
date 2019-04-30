@@ -14,11 +14,18 @@
     </q-header>
 
     <q-drawer v-model="right" side="right" bordered>
-      <!-- drawer content -->
+      <q-item-label header>Salas visitadas</q-item-label>
+      <q-item clickable v-ripple v-for="(trueValue, room) in $store.state.chatHistory" :key="room" :to="room" exact>
+        <q-item-section>
+          <q-item-label>
+            {{room}}
+          </q-item-label>
+        </q-item-section>
+      </q-item>
     </q-drawer>
 
     <q-page-container>
-      <router-view />
+      <router-view :key="$route.params.chatAddr" />
     </q-page-container>
 
   </q-layout>

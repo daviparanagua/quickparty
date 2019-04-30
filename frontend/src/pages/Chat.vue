@@ -101,6 +101,8 @@ export default {
         addr: this.addr,
         user: this.$store.state.user
       });
+
+      this.$store.commit('addToChatHistory', this.addr);
     },
     addMessage (message) {
       this.messages.push(message);
@@ -111,9 +113,6 @@ export default {
     }
   },
   created () {
-    // Recuperar dados de usuário salvos em localStorage
-    this.$store.dispatch('setUserData', {}); // Disparar o evento fazio fará com que o action restaure o localStorage sem alterações
-
     // Chat solicitado
     this.addr = `/${this.$route.params.chatAddr || ''}`;
 
@@ -180,6 +179,16 @@ export default {
       }));
       this.users = orderedUsers;
     });
+  },
+  beforeRouteUpdate (to, from, next) {
+    console.log('Desconectando');
+    this.socket.disconnect();
+    next();
+  },
+  beforeRouteLeave (to, from, next) {
+    console.log('Desconectando');
+    this.socket.disconnect();
+    // next();
   }
 };
 </script>
