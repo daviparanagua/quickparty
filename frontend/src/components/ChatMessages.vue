@@ -31,16 +31,16 @@ export default {
 
         if (!lastMessage) {
           lastMessage = message;
-          lastMessage.messages = [message.body];
+          lastMessage.messages = [message];
         } else if (message.type === 'user' && message.userId === lastMessage.userId) {
-          lastMessage.messages.push(message.body);
+          lastMessage.messages.push(message);
           lastMessage.timestamp = message.timestamp;
           lastMessage.id = lastMessage.id + message.id;
           message = null;
         } else {
           processedMessages.push(lastMessage);
           lastMessage = message;
-          lastMessage.messages = [message.body];
+          lastMessage.messages = [message];
         }
 
         if (remainingMessages === 0) {

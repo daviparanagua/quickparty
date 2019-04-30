@@ -41,7 +41,7 @@ module.exports = function (ctx) {
         'QItemLabel',
         'QAvatar',
         'QInput',
-        'QChatMessage'
+        'QTooltip'
       ],
 
       directives: [
