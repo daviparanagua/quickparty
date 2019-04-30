@@ -192,12 +192,14 @@ export default {
   #chat_messages {
     overflow: auto;
     background: #FFF;
-    flex-grow: 3;
+    flex-grow: 9;
   }
 
   #chat_users {
     background: #EEE;
     flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 30%;
   }
 
   #chat_typer {
