@@ -38,9 +38,10 @@ export default {
 
 <style>
 .system {
-  background: #EEE;
+  text-align: center;
   font-style: italic;
   font-size: 0.8em;
+  opacity: 0.8;
 }
 
 .message-container {
@@ -48,7 +49,7 @@ export default {
 }
 
 .system .message-time {
-  float:right;
+
 }
 
 .message-text {
