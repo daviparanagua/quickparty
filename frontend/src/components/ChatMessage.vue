@@ -48,8 +48,12 @@ export default {
   max-width: 60% !important;
 }
 
-.system .message-time {
+.system:hover .message-time {
+  display: block;
+}
 
+.system .message-time {
+  display: none;
 }
 
 .message-text {
