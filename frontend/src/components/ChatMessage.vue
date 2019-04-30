@@ -1,7 +1,7 @@
 <template>
-  <div class="message system q-px-sm q-py-xs" v-if="message.type == 'system'">
+  <div class="message system" v-if="message.type == 'system'">
       {{message.body}}
-    <div class="time">
+    <div class="time q-px-sm">
       {{printableTime}}
     </div>
   </div>
@@ -31,15 +31,12 @@ export default {
 .system {
   background: #EEE;
   font-style: italic;
-}
-
-.message:hover .time{
-  display:block;
+  font-size: 0.8em;
 }
 
 .message .time {
-  display: none;
   font-size: 0.8em;
   color: #666;
+  float:right;
 }
 </style>
