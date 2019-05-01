@@ -1,5 +1,24 @@
 <template>
-  <q-page class="q-pa-md row items-start q-col-gutter-md">
+  <q-page class="q-pa-md row justify-center items-center q-col-gutter-md" v-if="pendingAuth">
+    <div class="col-xs-12 col-md-6">
+      <q-card>
+        <q-card-section>
+          <div class="text-h6">Protegido por senha</div>
+        </q-card-section>
+        <q-card-section>
+          <q-input
+          v-model="password"
+          label="Senha de administrador"
+          hint="Digite a senha de administrador e aperte ENTER"
+          @keyup.enter="tryAccess"
+          :error-message="error"
+          :error="Boolean(error)"
+          ></q-input>
+        </q-card-section>
+      </q-card>
+    </div>
+  </q-page>
+  <q-page class="q-pa-md row items-start q-col-gutter-md" v-else-if="!error">
     <div class="col-xs-12 col-md-6">
       <q-card>
         <q-card-section>
@@ -48,6 +67,9 @@ import io from 'socket.io-client';
 export default {
   name: 'Admin',
   data: () => ({
+    error: '',
+    password: '',
+    pendingAuth: true,
     rooms: {},
     users: {}
   }),
@@ -84,14 +106,17 @@ export default {
     socket.on('authorized', (payload) => {
       this.$store.commit('setToken', payload.token);
       this.$store.dispatch('setUserData', { uuid: payload.uuid });
-      socket.emit('admin-authorize', {});
+      this.$q.loading.hide();
     });
 
     socket.on('admin-authorized', (payload) => {
       socket.emit('admin-list-rooms');
       socket.emit('admin-list-users');
-      this.loading = false;
-      this.$q.loading.hide();
+      this.pendingAuth = false;
+    });
+
+    socket.on('admin-unauthorized', (payload) => {
+      this.error = 'Sem autorização';
     });
 
     socket.on('admin-rooms', (payload) => {
@@ -105,7 +130,9 @@ export default {
     });
   },
   methods: {
-
+    tryAccess () {
+      this.socket.emit('admin-authorize', this.password);
+    }
   },
   beforeRouteUpdate (to, from, next) {
     this.socket.disconnect();

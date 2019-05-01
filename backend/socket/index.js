@@ -2,6 +2,7 @@ const uuid = require('uuid/v4');
 const jwt = require('jsonwebtoken');
 
 const jwtSecret = 'IstoEUmaPessimaIdeiaMasFuncionaPorAgora'; // TODO: Migrar para forma mais segura
+const adminPassword = 'senhasecreta'; // TODO: Definitivamente migrar para forma mais segura
 
 module.exports = function(io){
 
@@ -89,8 +90,12 @@ module.exports = function(io){
      * 
      * user
      */
-    socket.on('admin-authorize', function (payload) {      
-      // TODO: estabelecer critérios de administrador
+    socket.on('admin-authorize', function (payload) {
+      
+      if(payload !== adminPassword) { return socket.emit('admin-unauthorized', {}); }
+      console.log(payload);
+      console.log(users[socket.id].id);
+
       if (users[socket.id].id) {
         users[socket.id].isAdmin = true;
         return socket.emit('admin-authorized', {});
