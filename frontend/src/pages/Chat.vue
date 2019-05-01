@@ -68,6 +68,32 @@ export default {
     ChatTextBox,
     UsersList
   },
+  created () {
+    // Mostra carregamento (em x segundos: vide quasar.conf)
+    this.$q.loading.show();
+
+    // Chat solicitado
+    this.addr = `/${this.$route.params.chatAddr || ''}`;
+
+    // Título da janela
+    this.$store.commit('setTitle', this.addr);
+
+    // Conectar socket
+    this.socket = io('http://localhost:3000');
+    let socket = this.socket;
+
+    // Tudo ok?
+    socket.on('connect', () => {
+      this.socketId = socket.io.engine.id;
+      this.loading = false;
+      this.$q.loading.hide();
+    });
+
+    // Se já é conhecido, pode iniciar
+    if (this.username) {
+      this.joinRoom();
+    }
+  },
   methods: {
     sendMessage (message) {
       this.socket.emit('um', {
@@ -103,6 +129,7 @@ export default {
       });
 
       this.$store.commit('addToChatHistory', this.addr);
+      this.registerSocketEvents();
     },
     addMessage (message) {
       this.messages.push(message);
@@ -110,78 +137,44 @@ export default {
         let container = this.$el.querySelector('#chat_messages');
         container.scrollTop = container.scrollHeight;
       });
-    }
-  },
-  created () {
-    this.$q.loading.show();
+    },
+    registerSocketEvents () {
+      // ### Eventos ###
 
-    // Chat solicitado
-    this.addr = `/${this.$route.params.chatAddr || ''}`;
+      let socket = this.socket;
 
-    // Título da janela
-    this.$store.commit('setTitle', this.addr);
+      // Entrada na sala autorizada
+      socket.on('join-accepted', (payload) => {
+        this.socket.emit('users');
+      });
 
-    /**
-     * Conectar socket
-     */
-    this.socket = io('http://localhost:3000');
-    let socket = this.socket;
+      // Log de mensagens recebido
+      socket.on('msg_log', (payload) => {
+        for (let message of payload) {
+          this.addMessage(message);
+        }
+      });
 
-    // Tudo ok?
-    socket.on('connect', () => {
-      this.socketId = socket.io.engine.id;
-      this.loading = false;
-      this.$q.loading.hide();
-    });
-
-    // Se já é conhecido, pode iniciar
-    if (this.username) {
-      this.joinRoom();
-    }
-
-    // ### Eventos ###
-
-    /**
-     * Entrada na sala autorizada
-     */
-    socket.on('join-accepted', (payload) => {
-      this.socket.emit('users');
-    });
-
-    /**
-     * Log de mensagens recebido
-     */
-    socket.on('msg_log', (payload) => {
-      for (let message of payload) {
+      // SM: System Message: Mensagem do sistema
+      socket.on('sm', (message) => {
         this.addMessage(message);
-      }
-    });
+      });
 
-    /**
-     * SM: System Message: Mensagem do sistema
-     */
-    socket.on('sm', (message) => {
-      this.addMessage(message);
-    });
+      // UM: User Message: Mensagem de usuário
+      socket.on('um', (message) => {
+        this.addMessage(message);
+      });
 
-    /**
-     * UM: User Message: Mensagem de usuário
-     */
-    socket.on('um', (message) => {
-      this.addMessage(message);
-    });
-
-    /**
-     * USERS: Lista de usuários na sala
-     */
-    socket.on('users', (users) => {
-      let orderedUsers = (users.sort((a, b) => {
-        if (a.user.username < b.user.username) { return -1; };
-        if (a.user.username > b.user.username) { return 1; };
-        return 0;
-      }));
-      this.users = orderedUsers;
-    });
+      // USERS: Lista de usuários na sala
+      socket.on('users', (users) => {
+        let orderedUsers = (users.sort((a, b) => {
+          if (a.user.username < b.user.username) { return -1; };
+          if (a.user.username > b.user.username) { return 1; };
+          return 0;
+        }));
+        this.users = orderedUsers;
+      });
+    }
   },
   beforeRouteUpdate (to, from, next) {
     console.log('Desconectando');
