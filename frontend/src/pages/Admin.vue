@@ -1,6 +1,44 @@
 <template>
-  <q-page class="row" v-if="state == 'active'">
+  <q-page class="q-pa-md row items-start q-col-gutter-md">
+    <div class="col-xs-12 col-md-6">
+      <q-card>
+        <q-card-section>
+          <div class="text-h6">Salas abertas</div>
+        </q-card-section>
+        <q-card-section>
+          <q-list bordered separator>
+            <q-item v-for="room in rooms" :key="room.addr" clickable v-ripple :to="room.addr" target="_blank">
+              <q-item-section>
+                <q-item-label>{{ room.addr }}</q-item-label>
+                <q-item-label caption>
+                  {{ room.messages.length || 0 }} mensagens
+                  • {{ room.userCount || 0 }} usuário(s) ativos
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-card-section>
+      </q-card>
+    </div>
+    <div class="col-xs-12 col-md-6">
+      <q-card>
+        <q-card-section>
+          <div class="text-h6">Usuários ativos</div>
+        </q-card-section>
+        <q-card-section>
+          <q-list bordered separator>
+            <q-item v-for="user in usersInRoom" :key="user.socketId" v-ripple>
+              <q-item-section>
+                <q-item-label>{{ user.user.username }}</q-item-label>
+                <q-item-label caption>
 
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-card-section>
+      </q-card>
+    </div>
   </q-page>
 </template>
 
@@ -8,16 +46,23 @@
 import io from 'socket.io-client';
 
 export default {
-  name: 'Chat',
+  name: 'Admin',
   data: () => ({
-
+    rooms: {},
+    users: {}
   }),
   computed: {
-    username: {
-      get: function () { return this.$store.state.user.username; }
+    usersInRoom () {
+      let validUsers = [];
+      let users = this.users;
+
+      for (let socketId in this.users) {
+        if (users[socketId].user && (users[socketId].user.username || false)) {
+          validUsers.push(Object.assign(users[socketId], { socketId: socketId }));
+        }
+      }
+      return validUsers;
     }
-  },
-  components: {
   },
   created () {
     // Mostra carregamento (em x segundos: vide quasar.conf)
@@ -39,8 +84,24 @@ export default {
     socket.on('authorized', (payload) => {
       this.$store.commit('setToken', payload.token);
       this.$store.dispatch('setUserData', { uuid: payload.uuid });
+      socket.emit('admin-authorize', {});
+    });
+
+    socket.on('admin-authorized', (payload) => {
+      socket.emit('admin-list-rooms');
+      socket.emit('admin-list-users');
       this.loading = false;
       this.$q.loading.hide();
+    });
+
+    socket.on('admin-rooms', (payload) => {
+      this.rooms = payload;
+      setTimeout(() => { socket.emit('admin-list-rooms'); }, 2000);
+    });
+
+    socket.on('admin-users', (payload) => {
+      this.users = payload;
+      setTimeout(() => { socket.emit('admin-list-users'); }, 2000);
     });
   },
   methods: {

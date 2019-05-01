@@ -63,7 +63,7 @@ module.exports = function(io){
      * 
      * user
      */
-    socket.on('authorize', function (payload) {      
+    socket.on('authorize', function (payload) {   
       // Novo usuário
       if (!payload.token) {
         let newUuid = uuid();
@@ -77,17 +77,25 @@ module.exports = function(io){
       jwt.verify(payload.token, jwtSecret, function(err, decoded) {
         if (err) { return socket.emit('unauthorized'); }
 
-        if(decoded){
+        if (decoded) {
           users[socket.id].id = decoded.uuid;
           return socket.emit('authorized', {token: payload.token, uuid: decoded.uuid});
         }
-
-        
-      });
-
-
+      })
     });
 
+    /**
+     * admin-authorize: Autenticação de administrador
+     * 
+     * user
+     */
+    socket.on('admin-authorize', function (payload) {      
+      // TODO: estabelecer critérios de administrador
+      if (users[socket.id].id) {
+        users[socket.id].isAdmin = true;
+        return socket.emit('admin-authorized', {});
+      }
+    });
 
     /**
      * um: Mensagem gerada por usuário
@@ -148,8 +156,28 @@ module.exports = function(io){
     /**
      * Limpa variáveis ao desconectar
      */
-    socket.on('disconnected', function () {
+    socket.on('disconnect', function () {
       delete users[socket.id];
+    });
+
+    /**
+     * Lista de salas
+     */
+    socket.on('admin-list-rooms', function () {
+      if (!users[socket.id].isAdmin) { return false; } // TODO: fazer algo mais interessante que retornar nada pra nada
+
+      let roomsInfo = {...rooms};
+
+      Object.keys(rooms).map( (addr) => Object.assign(roomsInfo[addr], { userCount: getUsers(addr).length }) );      
+      socket.emit('admin-rooms', roomsInfo);
+    });
+
+    /**
+     * Lista de usuários
+     */
+    socket.on('admin-list-users', function () {
+      if (!users[socket.id].isAdmin) { return false; } // TODO: fazer algo mais interessante que retornar nada pra nada
+      socket.emit('admin-users', users);
     });
 
     // FUNÇÕES ACESSÓRIAS
@@ -210,7 +238,9 @@ module.exports = function(io){
      * 
      * @param {*} room 
      */
-    function getUsers(room){      
+    function getUsers(room){
+      if(!socket.adapter.rooms[room]){ return {}; }
+
       return Object.keys(socket.adapter.rooms[room].sockets).map((socketId) => users[socketId] );
     }
     
