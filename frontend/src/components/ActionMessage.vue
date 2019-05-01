@@ -1,6 +1,6 @@
 <template>
   <div class="message action q-py-sm q-mt-xs bg-secondary text-white">
-      {{message.action}}
+      {{message.sender}} {{message.action}}
     <span class="message-time">
       <timeago :datetime="message.timestamp" :auto-update="60"></timeago>
     </span>
