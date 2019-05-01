@@ -1,7 +1,5 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import uuid from 'uuid/v4';
-
 // import example from './module-example'
 
 Vue.use(Vuex);
@@ -15,6 +13,7 @@ export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
 
     state: {
+      token: null,
       user: {},
       windowTitle: 'MultiChat',
       chatHistory: {}
@@ -35,6 +34,9 @@ export default function (/* { ssrContext } */) {
       },
       setUserData (state, payload) {
         state.user = payload;
+      },
+      setToken (state, payload) {
+        state.token = payload;
       },
       addToChatHistory (state, payload) {
         state.chatHistory[payload] = true;
@@ -63,10 +65,6 @@ export default function (/* { ssrContext } */) {
     // Store the state object as a JSON string
     localStorage.setItem('store', JSON.stringify(state));
   });
-
-  if (!Store.state.user.uuid) {
-    Store.commit('setUserData', { uuid: uuid() });
-  }
 
   return Store;
 }

@@ -1,4 +1,7 @@
 const uuid = require('uuid/v4');
+const jwt = require('jsonwebtoken');
+
+const jwtSecret = 'IstoEUmaPessimaIdeiaMasFuncionaPorAgora'; // TODO: Migrar para forma mais segura
 
 module.exports = function(io){
 
@@ -16,6 +19,7 @@ module.exports = function(io){
   }
 
   let users = {};
+  let users2 = {};
   let rooms = {};
 
   io.on('connection', function (socket) {
@@ -53,6 +57,37 @@ module.exports = function(io){
       sendSystemMessage(socket.currentRoom, users[socket.id].user.username + ' entrou na sala');
       sendUserList(socket.currentRoom);
     });
+
+    /**
+     * authorize: Iniciar autenticação
+     * 
+     * user
+     */
+    socket.on('authorize', function (payload) {      
+      // Novo usuário
+      if (!payload.token) {
+        let newUuid = uuid();
+        let newToken = jwt.sign({'uuid': newUuid}, jwtSecret, {expiresIn: '7d'});
+
+        users[socket.id].id = newUuid;
+
+        return socket.emit('authorized', {token: newToken, uuid: newToken});
+      }
+
+      jwt.verify(payload.token, jwtSecret, function(err, decoded) {
+        if (err) { return socket.emit('unauthorized'); }
+
+        if(decoded){
+          users[socket.id].id = decoded.uuid;
+          return socket.emit('authorized', {token: payload.token, uuid: decoded.uuid});
+        }
+
+        
+      });
+
+
+    });
+
 
     /**
      * um: Mensagem gerada por usuário
@@ -146,7 +181,7 @@ module.exports = function(io){
 
       // Adiciona o ID de usuário a mensagens do usuário
       if(type === 'user'){
-        responsePayload.userId = users[socket.id].user.uuid;
+        responsePayload.userId = users[socket.id].id;
       }
 
       // Cria histórico de mensagens

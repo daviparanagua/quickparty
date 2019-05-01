@@ -86,14 +86,19 @@ export default {
     // Tudo ok?
     socket.on('connect', () => {
       this.socketId = socket.io.engine.id;
-      this.loading = false;
-      this.$q.loading.hide();
+      socket.emit('authorize', { token: this.$store.state.token });
     });
 
-    // Se já é conhecido, pode iniciar
-    if (this.username) {
-      this.joinRoom();
-    }
+    socket.on('authorized', (payload) => {
+      console.warn(payload);
+      this.$store.commit('setToken', payload.token);
+      this.$store.dispatch('setUserData', { uuid: payload.uuid });
+      this.loading = false;
+      this.$q.loading.hide();
+      if (this.username) {
+        this.joinRoom();
+      }
+    });
   },
   methods: {
     sendMessage (message) {
