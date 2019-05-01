@@ -40,6 +40,16 @@ Para criar ou entrar numa sala existente, digite o nome da sala na url, como htt
 ### Escolher um nome de usuário
 Você deverá escolher um nome ao entrar na sua primeira sala. Para alterá-lo, em qualquer sala, clique no seu nome na lista de participantes (ele estará em azul), digite um novo nome e aperte ENTER.
 
+### Enviar uma mensagem
+Digite sua mensagem na caixa de texto na parte inferior da tela e pressione ENTER (ou equivalente, dependendo de sua plataforma).
+
+### Enviar uma ação
+Mensagens de ação são sombreadas e têm mais destaque do que mensagens de texto e sistema. Para enviar uma mensagem de ação, envie `/do {texto da ação}`. Se seu nome é "Fulano", enviar `/is está correndo pelo parque` criará a ação "**Fulano está correndo pelo parque**", por exemplo.
+
+### Rolar dados
+
+Digite /roll {quantidade de dados}d{número de faces}. Digitar `/roll 1d6` irá rolar 1D6, como digitar `/roll 5D20` irá rolar 5D20.
+
 ## Administrar o Multichat
 Para entrar na interface de administrador, acesse a rota /admin/admin.
 O painel de administração é protegido por senha. A senha padrão é `senhasecreta`. Você pode (e deve) alterar esta senha diretamente no arquivo /socket/index.js, na pasta backend.
