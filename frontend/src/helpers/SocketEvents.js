@@ -19,7 +19,7 @@ export default function () {
 
   // ERR: Error Message: Mensagem de erro
   this.socket.on('err', (message) => {
-    this.$q.notify({ message, color: 'negative', 'text-color': 'white' });
+    this.$q.notify({ message, color: 'negative', 'text-color': 'white', position: 'top' });
   });
 
   // USERS: Lista de usuários na sala
