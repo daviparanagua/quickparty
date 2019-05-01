@@ -18,14 +18,15 @@ module.exports = function(message, parameters){
         return;
     }
 
-    const reducer = (accumulator, currentValue) => accumulator + currentValue;
-
+    
+    // Gera resultados individuais
     let outcomes = [];
-
     for(let i = 0; i<amount; i++){
         outcomes.push(Math.floor(Math.random() * sides) + 1);
     }
-
+    
+    // Acumula os resultados
+    const reducer = (accumulator, currentValue) => accumulator + currentValue;
     let result = outcomes.reduce(reducer);
 
     return {parsedBy: 'roll', outcomes, result, amount, sides, action: ` rolou ${amount}D${sides} e obteve ${result} (${outcomes.join(', ')})`};
