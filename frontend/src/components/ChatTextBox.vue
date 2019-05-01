@@ -1,6 +1,12 @@
 <template>
   <div>
-    <q-input outlined v-model="text" @keyup.enter.prevent.exact="emitMessage" label="Digite uma mensagem e pressione ENTER para enviar" />
+    <q-input
+      outlined
+      v-model="text"
+      @keyup.enter.prevent.exact="emitMessage"
+      autofocus
+      label="Digite uma mensagem e pressione ENTER para enviar"
+    />
   </div>
 </template>
 
