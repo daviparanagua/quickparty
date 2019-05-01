@@ -1,8 +1,18 @@
 <template>
-  <dice-roll
-    v-if="message.parsedBy == 'roll'"
-    :message = message
-  ></dice-roll>
+  <div v-if="message.parsedBy == 'roll'" class="message action dice q-pa-xs q-mt-xs bg-secondary text-white">
+      <div class="dice-result">
+        <q-icon name="fas fa-dice" /> {{message.sender}} tirou {{message.result}}
+      </div>
+      <div>
+          {{message.amount}}D{{message.sides}}:
+          <span v-for="outcome of message.outcomes" :key="Math.random() * outcome">
+            {{outcome}}
+          </span>
+      </div>
+    <div class="message-time">
+      <timeago :datetime="message.timestamp" :auto-update="60"></timeago>
+    </div>
+  </div>
   <div v-else class="message action action-default q-py-sm q-mt-xs bg-secondary text-white">
       {{message.sender}} {{message.action}}
     <span class="message-time">
@@ -12,12 +22,9 @@
 </template>
 
 <script>
-import DiceRoll from 'components/DiceRoll';
-
 export default {
   props: ['message'],
-  components: {
-    DiceRoll
+  computed: {
   }
 };
 </script>

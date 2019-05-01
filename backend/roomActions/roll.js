@@ -28,5 +28,5 @@ module.exports = function(message, parameters){
 
     let result = outcomes.reduce(reducer);
 
-    return {parsedBy: 'roll', outcomes, result, action: ` rolou ${amount}D${sides} e obteve ${result} (${outcomes.join(', ')})`};
+    return {parsedBy: 'roll', outcomes, result, amount, sides, action: ` rolou ${amount}D${sides} e obteve ${result} (${outcomes.join(', ')})`};
 }
