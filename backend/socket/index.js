@@ -93,9 +93,7 @@ module.exports = function(io){
     socket.on('admin-authorize', function (payload) {
       
       if(payload !== adminPassword) { return socket.emit('admin-unauthorized', {}); }
-      console.log(payload);
-      console.log(users[socket.id].id);
-
+      
       if (users[socket.id].id) {
         users[socket.id].isAdmin = true;
         return socket.emit('admin-authorized', {});
