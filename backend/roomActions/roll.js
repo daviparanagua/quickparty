@@ -1,7 +1,12 @@
 module.exports = function(message, parameters){
     let quantifier = (parameters[1] || '1D6').split(/[Dd]/);
-    let amount = quantifier[0] || 1;
-    let sides = quantifier[1] || 6;
+    let amount = parseInt(quantifier[0]) || 1;
+    let sides = parseInt(quantifier[1]) || 6;
+
+    if (isNaN(amount) || isNaN(sides) ){
+        throw 'Você não pode rolar dados com tantos lados. Role um dado de até 100 faces';
+        return;
+    }
 
     if (amount > 20){
         throw 'Você não pode rolar tantos dados de uma só vez. Role até 20 dados por vez';

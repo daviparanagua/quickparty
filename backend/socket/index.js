@@ -233,7 +233,6 @@ module.exports = function(io){
       if(type === 'user'){
         responsePayload.userId = users[socket.id].id;
         responsePayload = parseMessage(responsePayload);
-        console.log(responsePayload);
       }
 
       // Cria histórico de mensagens
