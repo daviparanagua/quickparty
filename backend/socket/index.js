@@ -1,5 +1,6 @@
 const uuid = require('uuid/v4');
 const jwt = require('jsonwebtoken');
+const actions = require('../roomActions');
 
 const jwtSecret = 'IstoEUmaPessimaIdeiaMasFuncionaPorAgora'; // TODO: Migrar para forma mais segura
 const adminPassword = 'senhasecreta'; // TODO: Definitivamente migrar para forma mais segura
@@ -184,6 +185,25 @@ module.exports = function(io){
 
     // FUNÇÕES ACESSÓRIAS
 
+    function parseMessage(message){
+      if(message.body.substr(0, 1) == '/'){
+        try {
+          let actionParameters = message.body.match(new RegExp('[A-Za-z0-9_-]+', 'g'));
+          let action = actionParameters[0];
+          if(actions[action]){
+              return Object.assign(message, actions[action](message, actionParameters), {type: 'action'});
+          } else {
+              throw `Ação /${action} não reconhecida`;
+          }
+        }
+        catch(err){
+          return message;
+        }
+      }
+  
+      return message;
+  }
+
     /**
      * Parametriza e envia uma mensagem de sistema a uma sala
      * 
@@ -212,6 +232,8 @@ module.exports = function(io){
       // Adiciona o ID de usuário a mensagens do usuário
       if(type === 'user'){
         responsePayload.userId = users[socket.id].id;
+        responsePayload = parseMessage(responsePayload);
+        console.log(responsePayload);
       }
 
       // Cria histórico de mensagens
