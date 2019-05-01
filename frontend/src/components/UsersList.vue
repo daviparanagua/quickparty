@@ -32,14 +32,14 @@ export default {
   props: ['users', 'my-id'],
   computed: {
     myuser () {
-      let myuser = this.users.filter((user) => user.id === this.myId);
+      let myuser = this.users.filter((user) => user.id === this.$store.state.user.uuid);
       return myuser[0];
     },
     username: {
       get: function () { return this.$store.state.user.username; }
     },
     otherUsers () {
-      return this.users.filter((user) => user.id !== this.myId);
+      return this.users.filter((user) => user.id !== this.$store.state.user.uuid);
     }
   },
   components: {

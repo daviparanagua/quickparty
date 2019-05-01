@@ -11,7 +11,6 @@
         <users-list
           class = "userslist"
           :users = "users"
-          :my-id = "socketId"
           @changeUsername="changeUsername"
         ></users-list>
       </div>
@@ -90,7 +89,6 @@ export default {
     });
 
     socket.on('authorized', (payload) => {
-      console.warn(payload);
       this.$store.commit('setToken', payload.token);
       this.$store.dispatch('setUserData', { uuid: payload.uuid });
       this.loading = false;
@@ -154,12 +152,10 @@ export default {
     }
   },
   beforeRouteUpdate (to, from, next) {
-    console.log('Desconectando');
     this.socket.disconnect();
     next();
   },
   beforeRouteLeave (to, from, next) {
-    console.log('Desconectando');
     this.socket.disconnect();
     // next();
   }
