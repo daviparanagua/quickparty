@@ -18,7 +18,7 @@
       </q-card>
     </div>
   </q-page>
-  <q-page class="q-pa-md row items-start q-col-gutter-md" v-else-if="!error">
+  <q-page class="q-pa-md row items-start q-col-gutter-md" v-else-if="error === ''">
     <div class="col-xs-12 col-md-6">
       <q-card>
         <q-card-section>
