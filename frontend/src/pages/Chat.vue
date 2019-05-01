@@ -113,6 +113,8 @@ export default {
     }
   },
   created () {
+    this.$q.loading.show();
+
     // Chat solicitado
     this.addr = `/${this.$route.params.chatAddr || ''}`;
 
@@ -129,6 +131,7 @@ export default {
     socket.on('connect', () => {
       this.socketId = socket.io.engine.id;
       this.loading = false;
+      this.$q.loading.hide();
     });
 
     // Se já é conhecido, pode iniciar

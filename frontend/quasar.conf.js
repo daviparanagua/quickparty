@@ -50,8 +50,14 @@ module.exports = function (ctx) {
 
       // Quasar plugins
       plugins: [
-        'Notify'
-      ]
+        'Notify',
+        'Loading'
+      ],
+      config: {
+        loading: {
+          delay: 500
+        }
+      }
 
       // iconSet: 'ionicons-v4'
       // lang: 'de' // Quasar language
