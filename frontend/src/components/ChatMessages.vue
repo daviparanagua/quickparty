@@ -35,7 +35,7 @@ export default {
         if (!lastMessage) {
           lastMessage = message;
           lastMessage.messages = [message];
-        } else if (message.type === 'user' && message.userId === lastMessage.userId) {
+        } else if (message.type === 'user' && lastMessage.type === 'user' && message.userId === lastMessage.userId) {
           lastMessage.messages.push(message);
           lastMessage.timestamp = message.timestamp;
           lastMessage.id = lastMessage.id + message.id;
