@@ -20,7 +20,6 @@ module.exports = function(io){
   }
 
   let users = {};
-  let users2 = {};
   let rooms = {};
 
   io.on('connection', function (socket) {
