@@ -71,7 +71,7 @@ module.exports = function(io){
 
         users[socket.id].id = newUuid;
 
-        return socket.emit('authorized', {token: newToken, uuid: newToken});
+        return socket.emit('authorized', {token: newToken, uuid: newUuid});
       }
 
       jwt.verify(payload.token, jwtSecret, function(err, decoded) {
