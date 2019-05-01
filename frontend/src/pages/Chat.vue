@@ -40,6 +40,7 @@ import io from 'socket.io-client';
 import ChatMessages from 'components/ChatMessages';
 import ChatTextBox from 'components/ChatTextBox';
 import UsersList from 'components/UsersList';
+import registerSocketEvents from '../helpers/SocketEvents';
 
 export default {
   name: 'Chat',
@@ -120,59 +121,25 @@ export default {
       this.socket.emit('userDataEdit', { user: this.$store.state.user });
     },
     joinRoom () {
-      /**
-       * Entrar na sala
-       */
+      // Entrar na sala
       this.socket.emit('join-request', {
         addr: this.addr,
         user: this.$store.state.user
       });
 
       this.$store.commit('addToChatHistory', this.addr);
-      this.registerSocketEvents();
+
+      // Entrada na sala autorizada
+      this.socket.on('join-accepted', (payload) => {
+        registerSocketEvents.call(this);
+        this.socket.emit('users');
+      });
     },
     addMessage (message) {
       this.messages.push(message);
       this.$nextTick(() => {
         let container = this.$el.querySelector('#chat_messages');
         container.scrollTop = container.scrollHeight;
-      });
-    },
-    registerSocketEvents () {
-      // ### Eventos ###
-
-      let socket = this.socket;
-
-      // Entrada na sala autorizada
-      socket.on('join-accepted', (payload) => {
-        this.socket.emit('users');
-      });
-
-      // Log de mensagens recebido
-      socket.on('msg_log', (payload) => {
-        for (let message of payload) {
-          this.addMessage(message);
-        }
-      });
-
-      // SM: System Message: Mensagem do sistema
-      socket.on('sm', (message) => {
-        this.addMessage(message);
-      });
-
-      // UM: User Message: Mensagem de usuário
-      socket.on('um', (message) => {
-        this.addMessage(message);
-      });
-
-      // USERS: Lista de usuários na sala
-      socket.on('users', (users) => {
-        let orderedUsers = (users.sort((a, b) => {
-          if (a.user.username < b.user.username) { return -1; };
-          if (a.user.username > b.user.username) { return 1; };
-          return 0;
-        }));
-        this.users = orderedUsers;
       });
     }
   },
