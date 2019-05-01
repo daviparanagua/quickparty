@@ -7,13 +7,6 @@
  *
  */
 export default function () {
-  // Log de mensagens recebido
-  this.socket.on('msg_log', (payload) => {
-    for (let message of payload) {
-      this.addMessage(message);
-    }
-  });
-
   // SM: System Message: Mensagem do sistema
   this.socket.on('sm', (message) => {
     this.addMessage(message);

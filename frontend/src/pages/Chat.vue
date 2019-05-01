@@ -132,11 +132,16 @@ export default {
       // Entrada na sala autorizada
       this.socket.on('join-accepted', (payload) => {
         registerSocketEvents.call(this);
+        this.messages = payload.messages;
+        this.scrollToBottom();
         this.socket.emit('users');
       });
     },
     addMessage (message) {
       this.messages.push(message);
+      this.scrollToBottom();
+    },
+    scrollToBottom () {
       this.$nextTick(() => {
         let container = this.$el.querySelector('#chat_messages');
         container.scrollTop = container.scrollHeight;

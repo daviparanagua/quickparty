@@ -44,10 +44,10 @@ module.exports = function(io){
 
       // Entrar
       socket.join(payload.addr);
-      socket.emit('join-accepted', { addr: payload.addr });
-
-      // Enviar mensagens antigas
-      socket.emit('msg_log', rooms[payload.addr].messages);
+      socket.emit('join-accepted', {
+        addr: payload.addr,
+        messages: rooms[payload.addr].messages 
+      });
 
       // Notificar demais participantes      
       sendSystemMessage(socket.currentRoom, users[socket.id].user.username + ' entrou na sala');
