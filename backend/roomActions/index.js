@@ -1,5 +1,4 @@
-const roll = require('./roll');
-
 module.exports = {
-    roll
+    roll: require('./roll'),
+    is: require('./is')
 }
