@@ -1,18 +1,21 @@
 <template>
   <div>
-    <chat-message
+    <component
       v-for = "(message, index) in processedMessages"
       :is-last="index === messages.length - 1"
+      :is = "msgComponent(message)"
       :key = "message.id"
       :message = "message"
       :sent = "message.sent || false"
-      ></chat-message>
+      ></component>
   </div>
 </template>
 
 <script>
 
 import ChatMessage from './ChatMessage';
+import SystemMessage from './SystemMessage';
+import ActionMessage from './ActionMessage';
 
 export default {
   props: ['messages', 'socketId'],
@@ -51,8 +54,19 @@ export default {
       return processedMessages;
     }
   },
+  methods: {
+    msgComponent (message) {
+      switch (message.type) {
+        case 'user': return 'chat-message';
+        case 'system': return 'system-message';
+        case 'action': return 'action-message';
+      }
+    }
+  },
   components: {
-    ChatMessage
+    ChatMessage,
+    SystemMessage,
+    ActionMessage
   }
 };
 </script>

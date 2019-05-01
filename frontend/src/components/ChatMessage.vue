@@ -1,13 +1,5 @@
 <template>
-  <div class="message system" v-if="message.type == 'system'">
-      {{message.body}}
-    <div class="message-time q-px-sm">
-      <timeago :datetime="message.timestamp" :auto-update="60"></timeago>
-    </div>
-  </div>
-  <div v-else
-    :class="['message message-user row items-end no-wrap q-pa-sm', {'reverse message-sent': message.sent}]"
-  >
+  <div :class="['message message-user row items-end no-wrap q-pa-sm', {'reverse message-sent': message.sent}]">
     <div class="message-container col-auto">
       <div class="message-sender">{{message.sender}}</div>
       <div class="message-text q-pa-sm q-my-xs" v-for="(msg, index) in message.messages" :key="msg.id">
