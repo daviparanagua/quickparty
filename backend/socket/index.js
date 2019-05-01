@@ -187,17 +187,12 @@ module.exports = function(io){
 
     function parseMessage(message){
       if(message.body.substr(0, 1) == '/'){
-        try {
-          let actionParameters = message.body.match(new RegExp('[A-Za-z0-9_-]+', 'g'));
-          let action = actionParameters[0];
-          if(actions[action]){
-              return Object.assign(message, actions[action](message, actionParameters), {type: 'action'});
-          } else {
-              throw `Ação /${action} não reconhecida`;
-          }
-        }
-        catch(err){
-          return message;
+        let actionParameters = message.body.match(new RegExp('[A-Za-z0-9_-]+', 'g'));
+        let action = actionParameters[0];
+        if(actions[action]){
+            return Object.assign(message, actions[action](message, actionParameters), {type: 'action'});
+        } else {
+            throw `Ação /${action} não reconhecida`;
         }
       }
   
@@ -232,7 +227,11 @@ module.exports = function(io){
       // Adiciona o ID de usuário a mensagens do usuário
       if(type === 'user'){
         responsePayload.userId = users[socket.id].id;
-        responsePayload = parseMessage(responsePayload);
+        try {
+          responsePayload = parseMessage(responsePayload);
+        } catch (error) {
+          return socket.emit('err', error);
+        }
       }
 
       // Cria histórico de mensagens
