@@ -150,7 +150,7 @@ module.exports = function(io){
         if(roomAddr == socket.id){continue;} // ... menos a sala padrão do próprio usuário consigo mesmo
 
           let allUsers = getUsers(socket.currentRoom);
-          let remainingUsers = allUsers.filter((user) => user.id != socket.id); // Ele só irá sair de fato depois, mas já enviar sem
+          let remainingUsers = allUsers.filter((user) => user.id != users[socket.id].id); // Ele só irá sair de fato depois, mas já enviar sem          
 
           // Notificar usuários e enviar nova lista aos participantes
           sendSystemMessage(roomAddr, users[socket.id].user.username + ' saiu da sala');
