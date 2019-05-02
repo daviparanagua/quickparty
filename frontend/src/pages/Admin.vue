@@ -94,7 +94,7 @@ export default {
     this.$store.commit('setTitle', 'Administração');
 
     // Conectar socket
-    this.socket = io('http://localhost:3000');
+    this.socket = io(process.env.SOCKET_URL || 'localhost:3000');
     let socket = this.socket;
 
     // Tudo ok?
