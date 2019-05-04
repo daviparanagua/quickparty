@@ -72,6 +72,15 @@ module.exports = function (ctx) {
       scopeHoisting: true,
       vueRouterMode: 'history',
       gzip: true,
+      env: ctx.dev
+        ? { // so on dev we'll have
+          API_URL: JSON.stringify('http://localhost:3000'),
+          SOCKET_URL: JSON.stringify('http://localhost:3000')
+        }
+        : { // and on build (production):
+          API_URL: JSON.stringify('https://play.paradoxocg.com.br:3000'),
+          SOCKET_URL: JSON.stringify('https://play.paradoxocg.com.br:3000')
+        },
       // vueCompiler: true,
       // analyze: true,
       // extractCSS: false,
