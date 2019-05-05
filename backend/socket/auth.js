@@ -1,4 +1,6 @@
 const jwt = require('jsonwebtoken');
+const uuid = require('uuid/v4');
+
 const jwtSecret = 'IstoEUmaPessimaIdeiaMasFuncionaPorAgora'; // TODO: Migrar para forma mais segura
 
 module.exports = function({io, socket, users, rooms, games, helpers}){
@@ -87,4 +89,51 @@ module.exports = function({io, socket, users, rooms, games, helpers}){
         return socket.emit('admin-authorized', {});
         }
     });
+    
+    /**
+     * userData: Salva dados do usuário neste servidor
+     * 
+     * user
+     */
+    socket.on('userData', function (payload) {
+        helpers.setUserData(socket.id, payload.user);
+    });
+
+    /**
+     * userDataEdit: Salva dados de usuário editados enquanto ele está uma sala
+     * 
+     * user
+     */
+    socket.on('userDataEdit', function (payload) {
+      helpers.sendSystemMessage(socket.currentRoom, users[socket.id].user.username + ' mudou seu nome para ' + payload.user.username);
+      helpers.setUserData(socket.id, payload.user);
+
+      // Atualiza os usuários e seus nomes nos participantes
+      sendUserList(socket.currentRoom);
+    });
+
+    /**
+     * Notifica salas de que um usuário saiu
+     */
+    socket.on('disconnecting', function(){
+      for (roomAddr in socket.rooms){ // Todas as salas devem ser notificadas...
+        if(roomAddr == socket.id){continue;} // ... menos a sala padrão do próprio usuário consigo mesmo
+
+          let allUsers = helpers.getUsers(socket.currentRoom);
+          let remainingUsers = allUsers.filter((user) => user.id != users[socket.id].id); // Ele só irá sair de fato depois, mas já enviar sem          
+
+          // Notificar usuários e enviar nova lista aos participantes
+          helpers.sendSystemMessage(roomAddr, users[socket.id].user.username + ' saiu da sala');
+          io.in(socket.currentRoom).emit('users', remainingUsers);
+
+      }
+    });
+
+    /**
+     * Remove socket da lista de usuários ao desconectar de uma sala
+     */
+    socket.on('disconnect', function () {
+      delete users[socket.id];
+    });
+
 }
