@@ -50,7 +50,7 @@ module.exports = function({io, socket, users, rooms, games}){
      */
 
     helpers.isOwner = function() {
-        return socket.id == rooms[socket.currentRoom].owner;
+        return users[socket.id].id == rooms[socket.currentRoom].owner;
     }
 
     return helpers;   

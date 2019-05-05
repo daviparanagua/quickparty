@@ -46,7 +46,7 @@ module.exports = function({io, socket, users, rooms, games, helpers}){
         rooms[payload.addr] = {
             addr: payload.addr,
             state: 'waiting',
-            owner: socket.id
+            owner: users[socket.id].id
         };
         }
 
