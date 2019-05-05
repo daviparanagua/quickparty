@@ -7,14 +7,8 @@
  *
  */
 export default function () {
-  // SM: System Message: Mensagem do sistema
-  this.socket.on('sm', (message) => {
-    this.addMessage(message);
-  });
-
-  // UM: User Message: Mensagem de usuário
-  this.socket.on('um', (message) => {
-    this.addMessage(message);
+  this.socket.on('render', (payload) => {
+    this.content = payload.content;
   });
 
   // ERR: Error Message: Mensagem de erro

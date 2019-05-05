@@ -1,12 +1,17 @@
 <template>
-  <div>
-    {{user.user.username}}
-  </div>
+   <q-badge color="gray-2" class="q-pa-xs q-ma-xs">
+    {{username}}
+   </q-badge>
 </template>
 
 <script>
 export default {
-  props: ['user']
+  computed: {
+    username () {
+      return this.user ? this.user.user.username : '';
+    }
+  },
+  props: ['user', 'isMe']
 };
 </script>
 

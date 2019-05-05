@@ -1,9 +1,10 @@
 <template>
   <div>
-    <a v-if="!edit" @click="edit = true">
-      <myself
+    <a v-if="!edit" @click="edit = true" >
+      <user
         :user = "myuser"
-      ></myself>
+        isMe = "true"
+      ></user>
     </a>
     <div v-else>
       <q-input
@@ -22,7 +23,6 @@
 </template>
 
 <script>
-import Myself from './Myself';
 import User from './User';
 
 export default {
@@ -43,7 +43,6 @@ export default {
     }
   },
   components: {
-    Myself,
     User
   }
 };
