@@ -2,10 +2,12 @@
   <q-page class="row" v-if="state == 'active'">
     <div class="col-xs-12" id="full_container">
       <div id="main_view" class="q-pa-md">
-        <main-view
+        <component
+          :is = "mainViewComponent"
           :socketId = "socketId"
           :content = "content"
-        ></main-view>
+          :user = "user"
+        ></component>
       </div>
       <div class="q-pa-sm" id="chat_users">
         <users-list
@@ -30,7 +32,7 @@
 
 <script>
 import io from 'socket.io-client';
-import MainView from 'components/MainView';
+import Lobby from 'components/Lobby';
 import UsersList from 'components/UsersList';
 import registerSocketEvents from '../helpers/SocketEvents';
 
@@ -39,11 +41,13 @@ export default {
   data: () => ({
     addr: '',
     content: '',
+    firstLoad: true,
     form: {
       username: ''
     },
-    mainview: [], // Visão atual do chat
     loading: true, // Chat ainda está carregando
+    mainViewComponent: 'Lobby', // Visão atual do chat
+    user: {},
     socketId: '', // ID do Socket
     users: [] // Todos os participantes do chat
   }),
@@ -58,8 +62,8 @@ export default {
     }
   },
   components: {
-    MainView,
-    UsersList
+    UsersList,
+    Lobby
   },
   created () {
     // Mostra carregamento (em x segundos: vide quasar.conf)
@@ -125,11 +129,14 @@ export default {
 
       this.$store.commit('addToChatHistory', this.addr);
 
-      // Entrada na sala autorizada
-      this.socket.on('join-accepted', (payload) => {
-        registerSocketEvents.call(this);
-        this.socket.emit('users');
-      });
+      if (this.firstLoad) {
+        this.firstLoad = true;
+        // Entrada na sala autorizada
+        this.socket.on('join-accepted', (payload) => {
+          this.user = payload.user;
+          registerSocketEvents.call(this);
+        });
+      }
     }
   },
   beforeRouteUpdate (to, from, next) {

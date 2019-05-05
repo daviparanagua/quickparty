@@ -12,7 +12,7 @@ module.exports = function({io, socket, users, rooms, games, helpers}){
      * 
      * token
      */
-    socket.on('authorize', function (payload) {   
+    socket.on('authorize', function (payload) {
         // Novo usuário
         if (!payload.token) {
         let newUuid = uuid();
@@ -32,7 +32,7 @@ module.exports = function({io, socket, users, rooms, games, helpers}){
             users[socket.id].id = decoded.uuid;
             return socket.emit('authorized', {token: payload.token, uuid: decoded.uuid});
         }
-        })
+      })
     });
 
     /**
@@ -52,6 +52,10 @@ module.exports = function({io, socket, users, rooms, games, helpers}){
 
         // Salva no socket qual é a sala a que esta conectado
         socket.currentRoom = payload.addr;
+        if(helpers.isOwner()){
+          users[socket.id].isAdmin = true;
+        }
+        console.log(users[socket.id]);
 
         // Atualizar dados do usuário
         helpers.setUserData(socket.id, payload.user);
@@ -61,7 +65,8 @@ module.exports = function({io, socket, users, rooms, games, helpers}){
         
         // Sinalizar aceite do participante
         socket.emit('join-accepted', {
-        addr: payload.addr
+          addr: payload.addr,
+          user: users[socket.id]
         });
 
         // Renderizar tela inicial
