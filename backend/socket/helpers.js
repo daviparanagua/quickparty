@@ -4,6 +4,9 @@ module.exports = function({io, socket, users, rooms, games}){
     let helpers = {};
 
     helpers.render = function (room) {
+        if(helpers.isOwner()){
+            return 'Bem-vindo(a)! Aguarde todos entrarem e pressione OK quando estiver pronto';
+        }
         return 'Bem-vindo(a)! Aguardando todos entrarem';
     }
 
@@ -40,6 +43,14 @@ module.exports = function({io, socket, users, rooms, games}){
      */
     helpers.sendUserList = function (room){
         io.in(room).emit('users', helpers.getUsers(room));
+    }
+
+    /**
+     * É o dono da sala em que está?
+     */
+
+    helpers.isOwner = function() {
+        return socket.id == rooms[socket.currentRoom].owner;
     }
 
     return helpers;   
