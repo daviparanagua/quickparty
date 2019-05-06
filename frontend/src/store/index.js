@@ -15,6 +15,7 @@ export default function (/* { ssrContext } */) {
     state: {
       token: null,
       user: {},
+      socket: {},
       windowTitle: 'MultiChat',
       chatHistory: {}
     },
@@ -37,6 +38,9 @@ export default function (/* { ssrContext } */) {
       },
       setToken (state, payload) {
         state.token = payload;
+      },
+      setSocket (state, payload) {
+        state.socket = payload;
       },
       addToChatHistory (state, payload) {
         state.chatHistory[payload] = true;
@@ -63,7 +67,9 @@ export default function (/* { ssrContext } */) {
   // Subscribe to store updates
   Store.subscribe((mutation, state) => {
     // Store the state object as a JSON string
-    localStorage.setItem('store', JSON.stringify(state));
+    let savedState = Object.assign({}, state);
+    delete savedState.socket;
+    localStorage.setItem('store', JSON.stringify(savedState));
   });
 
   return Store;

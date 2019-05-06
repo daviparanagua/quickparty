@@ -1,6 +1,6 @@
 // FUNÇÕES ACESSÓRIAS
 
-module.exports = function({io, socket, users, rooms, games}){
+module.exports = function({io, socket, users, rooms}){
     let helpers = {};
 
     helpers.render = function (room) {

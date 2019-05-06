@@ -28,12 +28,19 @@
       ></q-input>
     </div>
   </q-page>
+  <q-page class="row items-center justify-center" v-else-if="state == 'template'">
+    <div class="col-xs-12" id="full_container">
+      <template-chooser
+      ></template-chooser>
+    </div>
+  </q-page>
 </template>
 
 <script>
 import io from 'socket.io-client';
 import Lobby from 'components/Lobby';
 import UsersList from 'components/UsersList';
+import TemplateChooser from 'components/TemplateChooser';
 import registerSocketEvents from '../helpers/SocketEvents';
 
 export default {
@@ -48,6 +55,7 @@ export default {
     loading: true, // Chat ainda está carregando
     mainViewComponent: 'Lobby', // Visão atual do chat
     user: {},
+    room: {},
     socketId: '', // ID do Socket
     users: [] // Todos os participantes do chat
   }),
@@ -55,15 +63,20 @@ export default {
     username: {
       get: function () { return this.$store.state.user.username; }
     },
+    canManage () {
+      return this.user.isAdmin;
+    },
     state () {
       if (!this.$store.state.user.username) return 'profile';
-      if (this.loading) return 'loading';
+      else if (this.loading) return 'loading';
+      else if (this.canManage && !this.template) return 'template';
       return 'active';
     }
   },
   components: {
     UsersList,
-    Lobby
+    Lobby,
+    TemplateChooser
   },
   created () {
     // Mostra carregamento (em x segundos: vide quasar.conf)
@@ -77,6 +90,7 @@ export default {
 
     // Conectar socket
     this.socket = io(process.env.SOCKET_URL || 'localhost:3000');
+    this.$store.commit('setSocket', this.socket);
     let socket = this.socket;
 
     // Tudo ok?
