@@ -49,7 +49,6 @@ module.exports = function({io, socket, users, rooms, games, helpers}){
      * Lista de templates
      */
     socket.on('get-templates', function () {
-        console.log(templates);
         socket.emit('templates', templates);
     });
 
@@ -58,8 +57,9 @@ module.exports = function({io, socket, users, rooms, games, helpers}){
      */
     socket.on('select-template', function (payload) {
         if (!users[socket.id].isAdmin) { return false; } // TODO: fazer algo mais interessante que retornar nada pra nada
-        
-        rooms[socket.currentRoom].template = payload;
+        if (!templates[payload]) { return false; } // TODO DEFINIR ERRO: TEMPLATE NÃO EXISTE
+        console.log(payload);
+        rooms[socket.currentRoom].template = templates[payload];
         io.in(socket.currentRoom).emit('room', rooms[socket.currentRoom] );
     });
 
