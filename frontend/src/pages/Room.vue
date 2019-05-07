@@ -68,7 +68,7 @@ export default {
     state () {
       if (!this.$store.state.user.username) return 'profile';
       else if (this.loading) return 'loading';
-      else if (this.canManage && !this.template) return 'template';
+      else if (this.canManage && !this.room.template) return 'template';
       return 'active';
     }
   },
@@ -102,8 +102,12 @@ export default {
         this.joinRoom();
       }
     },
+    room (payload) {
+      this.room = payload;
+    },
     'join-accepted': function (payload) {
       this.user = payload.user;
+      this.room = payload.room;
       registerSocketEvents.call(this);
     }
   },

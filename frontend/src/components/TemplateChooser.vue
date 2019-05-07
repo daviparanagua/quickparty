@@ -1,8 +1,10 @@
 <template>
   <div>
-    <h1>Escolha o seu template</h1>
-    <div v-for="template in templates" :key="template.name">
-      {{template.name}}
+    <h5>Escolha o seu template</h5>
+    <div class="row q-col-gutter-sm">
+      <q-card class="col-sm-6 col-md-4 col-lg-3" v-for="template in templates" :key="template.id" @click="selectTemplate(template.id)">
+        {{template.name}}
+      </q-card>
     </div>
   </div>
 </template>
@@ -14,11 +16,17 @@ export default {
   }),
   created () {
     this.$socket.emit('get-templates');
-
-    this.$socket.on('templates', (templates) => {
+  },
+  methods: {
+    selectTemplate (id) {
+      this.$socket.emit('select-template', id);
+    }
+  },
+  sockets: {
+    templates (templates) {
       console.log(templates);
       this.templates = templates;
-    });
+    }
   }
 };
 </script>

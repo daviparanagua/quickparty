@@ -54,15 +54,13 @@ module.exports = function({io, socket, users, rooms, games, helpers}){
     });
 
     /**
-     * Lista de salas - função administrativa
+     * Escolha de template
      */
-    socket.on('room-set-template', function () {
+    socket.on('select-template', function (payload) {
         if (!users[socket.id].isAdmin) { return false; } // TODO: fazer algo mais interessante que retornar nada pra nada
-
-        let roomsInfo = {...rooms};
-
-        Object.keys(rooms).map( (addr) => Object.assign(roomsInfo[addr], { userCount: getUsers(addr).length }) );      
-        socket.emit('admin-rooms', roomsInfo);
+        
+        rooms[socket.currentRoom].template = payload;
+        io.in(socket.currentRoom).emit('room', rooms[socket.currentRoom] );
     });
 
     function filterRoomInfo(room) {
