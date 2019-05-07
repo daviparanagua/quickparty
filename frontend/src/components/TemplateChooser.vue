@@ -13,10 +13,9 @@ export default {
     templates: {}
   }),
   created () {
-    let socket = this.$store.socket;
-    socket.emit('get-templates');
+    this.$socket.emit('get-templates');
 
-    socket.on('templates', (templates) => {
+    this.$socket.on('templates', (templates) => {
       console.log(templates);
       this.templates = templates;
     });

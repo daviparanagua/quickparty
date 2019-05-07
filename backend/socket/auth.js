@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const uuid = require('uuid/v4');
 
 const jwtSecret = 'IstoEUmaPessimaIdeiaMasFuncionaPorAgora'; // TODO: Migrar para forma mais segura
+const adminPassword = 'senhasecreta';
 
 module.exports = function({io, socket, users, rooms, helpers}){
     // Registrar usuário

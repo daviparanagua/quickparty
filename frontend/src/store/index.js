@@ -15,7 +15,6 @@ export default function (/* { ssrContext } */) {
     state: {
       token: null,
       user: {},
-      socket: {},
       windowTitle: 'MultiChat',
       chatHistory: {}
     },
@@ -38,9 +37,6 @@ export default function (/* { ssrContext } */) {
       },
       setToken (state, payload) {
         state.token = payload;
-      },
-      setSocket (state, payload) {
-        state.socket = payload;
       },
       addToChatHistory (state, payload) {
         state.chatHistory[payload] = true;

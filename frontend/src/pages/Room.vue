@@ -37,7 +37,6 @@
 </template>
 
 <script>
-import io from 'socket.io-client';
 import Lobby from 'components/Lobby';
 import UsersList from 'components/UsersList';
 import TemplateChooser from 'components/TemplateChooser';
@@ -87,19 +86,14 @@ export default {
 
     // Título da janela
     this.$store.commit('setTitle', this.addr);
-
-    // Conectar socket
-    this.socket = io(process.env.SOCKET_URL || 'localhost:3000');
-    this.$store.commit('setSocket', this.socket);
-    let socket = this.socket;
-
+  },
+  mounted () {
+    this.socketId = this.$socket.io.engine.id;
+    this.$socket.emit('authorize', { token: this.$store.state.token });
+  },
+  sockets: {
     // Tudo ok?
-    socket.on('connect', () => {
-      this.socketId = socket.io.engine.id;
-      socket.emit('authorize', { token: this.$store.state.token });
-    });
-
-    socket.on('authorized', (payload) => {
+    authorized (payload) {
       this.$store.commit('setToken', payload.token);
       this.$store.dispatch('setUserData', { uuid: payload.uuid });
       this.loading = false;
@@ -107,11 +101,15 @@ export default {
       if (this.username) {
         this.joinRoom();
       }
-    });
+    },
+    'join-accepted': function (payload) {
+      this.user = payload.user;
+      registerSocketEvents.call(this);
+    }
   },
   methods: {
     sendMessage (message) {
-      this.socket.emit('um', {
+      this.$socket.emit('um', {
         sender: this.username,
         room: this.addr,
         body: message
@@ -121,7 +119,7 @@ export default {
       let newUsername = this.form.username;
       if (newUsername) {
         this.$store.dispatch('setUserData', { username: newUsername });
-        this.socket.emit('userData', { user: this.$store.state.user });
+        this.$socket.emit('userData', { user: this.$store.state.user });
         this.joinRoom();
       }
     },
@@ -132,34 +130,17 @@ export default {
       }
 
       this.$store.dispatch('setUserData', { username: newUsername });
-      this.socket.emit('userDataEdit', { user: this.$store.state.user });
+      this.$socket.emit('userDataEdit', { user: this.$store.state.user });
     },
     joinRoom () {
       // Entrar na sala
-      this.socket.emit('join-request', {
+      this.$socket.emit('join-request', {
         addr: this.addr,
         user: this.$store.state.user
       });
 
       this.$store.commit('addToChatHistory', this.addr);
-
-      if (this.firstLoad) {
-        this.firstLoad = true;
-        // Entrada na sala autorizada
-        this.socket.on('join-accepted', (payload) => {
-          this.user = payload.user;
-          registerSocketEvents.call(this);
-        });
-      }
     }
-  },
-  beforeRouteUpdate (to, from, next) {
-    this.socket.disconnect();
-    next();
-  },
-  beforeRouteLeave (to, from, next) {
-    this.socket.disconnect();
-    // next();
   }
 };
 </script>

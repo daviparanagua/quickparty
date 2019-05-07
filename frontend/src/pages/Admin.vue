@@ -62,8 +62,6 @@
 </template>
 
 <script>
-import io from 'socket.io-client';
-
 export default {
   name: 'Admin',
   data: () => ({
@@ -93,54 +91,38 @@ export default {
     // Título da janela
     this.$store.commit('setTitle', 'Administração');
 
-    // Conectar socket
-    this.socket = io(process.env.SOCKET_URL || 'localhost:3000');
-    let socket = this.socket;
-
-    // Tudo ok?
-    socket.on('connect', () => {
-      this.socketId = socket.io.engine.id;
-      socket.emit('authorize', { token: this.$store.state.token });
-    });
-
-    socket.on('authorized', (payload) => {
+    // Início
+    this.socketId = this.$socket.io.engine.id;
+    this.$socket.emit('authorize', { token: this.$store.state.token });
+  },
+  sockets: {
+    'authorized': function (payload) {
       this.$store.commit('setToken', payload.token);
       this.$store.dispatch('setUserData', { uuid: payload.uuid });
       this.$q.loading.hide();
-    });
-
-    socket.on('admin-authorized', (payload) => {
-      socket.emit('admin-list-rooms');
-      socket.emit('admin-list-users');
+    },
+    'admin-authorized': function (payload) {
+      this.$socket.emit('admin-list-rooms');
+      this.$socket.emit('admin-list-users');
       this.pendingAuth = false;
-    });
-
-    socket.on('admin-unauthorized', (payload) => {
+      this.error = '';
+    },
+    'admin-unauthorized': function (payload) {
       this.error = 'Sem autorização';
-    });
-
-    socket.on('admin-rooms', (payload) => {
+    },
+    'admin-rooms': function (payload) {
       this.rooms = payload;
-      setTimeout(() => { socket.emit('admin-list-rooms'); }, 2000);
-    });
-
-    socket.on('admin-users', (payload) => {
+      setTimeout(() => { this.$socket.emit('admin-list-rooms'); }, 2000);
+    },
+    'admin-users': function (payload) {
       this.users = payload;
-      setTimeout(() => { socket.emit('admin-list-users'); }, 2000);
-    });
+      setTimeout(() => { this.$socket.emit('admin-list-users'); }, 2000);
+    }
   },
   methods: {
     tryAccess () {
-      this.socket.emit('admin-authorize', this.password);
+      this.$socket.emit('admin-authorize', this.password);
     }
-  },
-  beforeRouteUpdate (to, from, next) {
-    this.socket.disconnect();
-    next();
-  },
-  beforeRouteLeave (to, from, next) {
-    this.socket.disconnect();
-    // next();
   }
 };
 </script>

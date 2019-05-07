@@ -7,17 +7,17 @@
  *
  */
 export default function () {
-  this.socket.on('render', (payload) => {
+  this.$socket.on('render', (payload) => {
     this.content = payload.content;
   });
 
   // ERR: Error Message: Mensagem de erro
-  this.socket.on('err', (message) => {
+  this.$socket.on('err', (message) => {
     this.$q.notify({ message, color: 'negative', 'text-color': 'white', position: 'top' });
   });
 
   // USERS: Lista de usuários na sala
-  this.socket.on('users', (users) => {
+  this.$socket.on('users', (users) => {
     let orderedUsers = (users.sort((a, b) => {
       if (a.user.username < b.user.username) { return -1; };
       if (a.user.username > b.user.username) { return 1; };
