@@ -3,7 +3,7 @@
     <div class="col-sm-12 text-center">
       Aguardando todos entrarem...
       <div>
-        <q-btn color="primary" v-if="user.isAdmin">
+        <q-btn color="primary" v-if="user.isAdmin" @click="start">
             Começar!
         </q-btn>
       </div>
@@ -13,7 +13,12 @@
 
 <script>
 export default {
-  props: ['user']
+  props: ['user'],
+  methods: {
+    start () {
+      this.$socket.emit('start', {});
+    }
+  }
 };
 </script>
 

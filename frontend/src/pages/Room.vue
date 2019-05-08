@@ -41,6 +41,7 @@ import Lobby from 'components/Lobby';
 import UsersList from 'components/UsersList';
 import TemplateChooser from 'components/TemplateChooser';
 import registerSocketEvents from '../helpers/SocketEvents';
+import Draw from 'components/Draw';
 
 export default {
   name: 'Chat',
@@ -52,7 +53,6 @@ export default {
       username: ''
     },
     loading: true, // Chat ainda está carregando
-    mainViewComponent: 'Lobby', // Visão atual do chat
     user: {},
     room: {},
     socketId: '', // ID do Socket
@@ -70,12 +70,17 @@ export default {
       else if (this.loading) return 'loading';
       else if (this.canManage && !this.room.template) return 'template';
       return 'active';
+    },
+    mainViewComponent () {
+      if (!this.room.started) return 'Lobby';
+      return 'Draw';
     }
   },
   components: {
     UsersList,
     Lobby,
-    TemplateChooser
+    TemplateChooser,
+    Draw
   },
   created () {
     // Mostra carregamento (em x segundos: vide quasar.conf)
