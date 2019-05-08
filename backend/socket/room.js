@@ -1,6 +1,6 @@
 const templates = require('../templates');
 
-module.exports = function({io, socket, users, rooms, games, helpers}){
+module.exports = function({io, socket, users, rooms, helpers}){
     /**
      * join-request: Solicitação de entrada em sala
      * 
@@ -32,7 +32,7 @@ module.exports = function({io, socket, users, rooms, games, helpers}){
         socket.emit('join-accepted', {
           addr: payload.addr,
           user: users[socket.id],
-          room: filterRoomInfo(rooms[payload.addr])
+          room: helpers.getRoom(payload.addr)
         });
 
         // Renderizar tela inicial
@@ -63,9 +63,15 @@ module.exports = function({io, socket, users, rooms, games, helpers}){
         io.in(socket.currentRoom).emit('room', rooms[socket.currentRoom] );
     });
 
-    function filterRoomInfo(room) {
-        return room;
-    }
+    /**
+     * Início
+     */
+    socket.on('start', function (options) {
+        if (!users[socket.id].isAdmin) { return false; } // TODO: fazer algo mais interessante que retornar nada pra nada
 
+        let roomId = socket.currentRoom;
+        rooms[roomId].started = true;
+        helpers.sendRoomInfo(socket.currentRoom);
+    });
 
 }

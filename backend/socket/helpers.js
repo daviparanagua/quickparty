@@ -46,6 +46,36 @@ module.exports = function({io, socket, users, rooms}){
     }
 
     /**
+     * Obtém os dados da sala
+     * 
+     * @param {*} room 
+     */
+    helpers.getRoom = function(room){
+        if(!rooms[room]){ return {}; }
+
+        return rooms[room];
+    }
+
+    /**
+     * Filtra os dados de uma sala
+     * 
+     * @param {*} room 
+     */
+    
+    helpers.filterRoomInfo = function (room) {
+        return room;
+    }
+
+     /**
+     * Envia aos participantes de uma sala a definição atual da sala
+     * 
+     * @param {*} room 
+     */
+    helpers.sendRoomInfo = function (room){
+        io.in(room).emit('room', helpers.filterRoomInfo(helpers.getRoom(room)));
+    }
+
+    /**
      * É o dono da sala em que está?
      */
 
