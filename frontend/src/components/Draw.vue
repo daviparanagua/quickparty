@@ -4,6 +4,7 @@
       O escolhido foi
       <h5>{{chosenOne}}</h5>
       <q-btn
+        v-if="user.isAdmin"
         color= "primary"
         @click= "$emit('stop')"
         label= "Reiniciar"
