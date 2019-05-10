@@ -5,8 +5,9 @@
         <component
           :is = "mainViewComponent"
           :socketId = "socketId"
-          :content = "content"
           :user = "user"
+          :room = "room"
+          :users = "users"
         ></component>
       </div>
       <div class="q-pa-sm" id="chat_users">
@@ -47,7 +48,6 @@ export default {
   name: 'Chat',
   data: () => ({
     addr: '',
-    content: '',
     firstLoad: true,
     form: {
       username: ''

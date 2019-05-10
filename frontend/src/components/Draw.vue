@@ -6,6 +6,12 @@
 
 <script>
 export default {
+  props: ['user', 'room', 'users'],
+  sockets: {
+    template (payload) {
+      console.error(payload);
+    }
+  }
 };
 </script>
 

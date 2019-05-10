@@ -71,7 +71,7 @@ module.exports = function({io, socket, users, rooms}){
      * 
      * @param {*} room 
      */
-    helpers.sendRoomInfo = function (room){
+    helpers.sendRoomInfo = function (room = socket.currentRoom){
         io.in(room).emit('room', helpers.filterRoomInfo(helpers.getRoom(room)));
     }
 

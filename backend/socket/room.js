@@ -68,9 +68,14 @@ module.exports = function({io, socket, users, rooms, helpers}){
      */
     socket.on('start', function (options) {
         if (!users[socket.id].isAdmin) { return false; } // TODO: fazer algo mais interessante que retornar nada pra nada
+        const roomId = socket.currentRoom;
+        const gameTemplate = rooms[roomId].template.id;
+        const gameInstance = require('../templates/' + gameTemplate)({io, socket, users, rooms, helpers});
 
-        let roomId = socket.currentRoom;
         rooms[roomId].started = true;
+        rooms[roomId].activeUsers = helpers.getUsers(roomId);
+        rooms[roomId].gameInstance = gameInstance;
+        gameInstance.start();
         helpers.sendRoomInfo(socket.currentRoom);
     });
 
