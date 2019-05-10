@@ -7,7 +7,7 @@ module.exports = function({io, socket, users, rooms, games, helpers}){
 
         let roomsInfo = {...rooms};
 
-        Object.keys(rooms).map( (addr) => Object.assign(roomsInfo[addr], { userCount: getUsers(addr).length }) );      
+        Object.keys(rooms).map( (addr) => Object.assign(roomsInfo[addr], { userCount: helpers.getUsers(addr).length }) );      
         socket.emit('admin-rooms', roomsInfo);
     });
 

@@ -30,8 +30,7 @@
               <q-item-section>
                 <q-item-label>{{ room.addr }}</q-item-label>
                 <q-item-label caption>
-                  {{ room.messages.length || 0 }} mensagens
-                  • {{ room.userCount || 0 }} usuário(s) ativos
+                  {{ room.userCount || 0 }} usuário(s) ativos
                 </q-item-label>
               </q-item-section>
             </q-item>
