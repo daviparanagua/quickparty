@@ -1,6 +1,8 @@
 const templates = require('../templates');
 
-module.exports = function({io, socket, users, rooms, helpers}){
+module.exports = function(commonIncludes){
+    let {io, socket, users, rooms, helpers, currentRoom} = commonIncludes;
+
     /**
      * join-request: Solicitação de entrada em sala
      * 
@@ -70,13 +72,15 @@ module.exports = function({io, socket, users, rooms, helpers}){
         if (!users[socket.id].isAdmin) { return false; } // TODO: fazer algo mais interessante que retornar nada pra nada
         const roomId = socket.currentRoom;
         const gameTemplate = rooms[roomId].template.id;
-        const gameInstance = require('../templates/' + gameTemplate)({io, socket, users, rooms, helpers});
+        const gameSession = require('../templates/' + gameTemplate)(commonIncludes);
 
         rooms[roomId].started = true;
         rooms[roomId].activeUsers = helpers.getUsers(roomId);
-        rooms[roomId].gameInstance = gameInstance;
-        gameInstance.start();
+        rooms[roomId].session = gameSession;
+        console.log(gameSession);
+        gameSession.start();
         helpers.sendRoomInfo(socket.currentRoom);
+        //helpers.sendRoomSessionInfo(socket.currentRoom);
     });
 
 }

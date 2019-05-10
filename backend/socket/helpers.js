@@ -63,6 +63,8 @@ module.exports = function({io, socket, users, rooms}){
      */
     
     helpers.filterRoomInfo = function (room) {
+        room.session = room.session.public;
+        console.log(room);
         return room;
     }
 
