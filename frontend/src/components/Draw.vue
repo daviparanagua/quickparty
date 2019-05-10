@@ -3,6 +3,9 @@
     <div class="col-sm-12 text-center">
       O escolhido foi
       <h5>{{chosenOne}}</h5>
+      <div>
+        Participaram: {{ room.activeUsers.map((item) => item.user.username).join(', ') }}
+      </div>
       <q-btn
         v-if="user.isAdmin"
         color= "primary"
