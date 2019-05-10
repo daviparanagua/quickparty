@@ -8,6 +8,7 @@
           :user = "user"
           :room = "room"
           :users = "users"
+          @stop = "stop"
         ></component>
       </div>
       <div class="q-pa-sm" id="chat_users">
@@ -153,6 +154,10 @@ export default {
       });
 
       this.$store.commit('addToChatHistory', this.addr);
+    },
+    stop () {
+      console.log('Parando');
+      this.$socket.emit('stop');
     }
   }
 };

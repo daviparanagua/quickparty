@@ -77,10 +77,22 @@ module.exports = function(commonIncludes){
         rooms[roomId].started = true;
         rooms[roomId].activeUsers = helpers.getUsers(roomId);
         rooms[roomId].session = gameSession;
-        console.log(gameSession);
         gameSession.start();
         helpers.sendRoomInfo(socket.currentRoom);
-        //helpers.sendRoomSessionInfo(socket.currentRoom);
+    });
+
+    /**
+     * Parar o jogo
+     */
+    socket.on('stop', function (options) {
+        if (!users[socket.id].isAdmin) { return false; } // TODO: fazer algo mais interessante que retornar nada pra nada
+        const roomId = socket.currentRoom;
+        const gameTemplate = rooms[roomId].template.id;
+
+        rooms[roomId].started = false;
+        delete rooms[roomId].activeUsers;
+        delete rooms[roomId].session;
+        helpers.sendRoomInfo(socket.currentRoom);
     });
 
 }
