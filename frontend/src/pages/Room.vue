@@ -107,6 +107,10 @@ export default {
         this.joinRoom();
       }
     },
+    unauthorized (payload) {
+      this.$store.commit('setToken', '');
+      this.$socket.emit('authorize');
+    },
     room (payload) {
       this.room = payload;
     },
