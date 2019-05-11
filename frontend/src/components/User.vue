@@ -12,7 +12,7 @@ export default {
     },
     chipColor () {
       if (this.isMe) { return 'primary'; }
-      return 'gray';
+      return 'info';
     }
   },
   props: ['user', 'isMe']
