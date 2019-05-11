@@ -3,13 +3,20 @@ let templateModule = {
         id: 'liar',
         name: 'O Mentiroso',
         component: 'Liar',
-        action_description: 'jogar O Mentiroso'
+        action_description: 'jogar O Mentiroso',
+        players: {
+            min: 3,
+            max: 15
+        }
     },
     'draw': {
         id: 'draw',
         name: 'Sorteio',
         component: 'Draw',
-        action_description: 'participar de um sorteio'
+        action_description: 'participar de um sorteio',
+        players: {
+            min: 2
+        }
     }
 };
 

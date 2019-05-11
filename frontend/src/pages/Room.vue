@@ -3,6 +3,7 @@
     <div class="col-xs-12" id="full_container">
       <div id="main_view" class="q-pa-md">
         <component
+          v-if="this.room"
           :is = "mainViewComponent"
           :socketId = "socketId"
           :user = "user"
@@ -13,9 +14,9 @@
       </div>
       <div class="q-pa-sm" id="chat_users">
         <users-list
-          class = "userslist"
-          :users = "users"
-          @changeUsername="changeUsername"
+          class= "userslist"
+          :users= "users"
+          @changeUsername= "changeUsername"
         ></users-list>
       </div>
     </div>
