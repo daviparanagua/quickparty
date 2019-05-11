@@ -64,7 +64,6 @@ module.exports = function({io, socket, users, rooms}){
     
     helpers.filterRoomInfo = function (room) {
         if (room.session) { room.session = room.session.public; }
-        console.log(room);
         return room;
     }
 

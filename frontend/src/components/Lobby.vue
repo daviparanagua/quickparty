@@ -6,6 +6,9 @@
         <q-btn color="primary" v-if="user.isAdmin" @click="start">
             Começar!
         </q-btn>
+        <q-btn v-if="user.isAdmin" @click="clearTemplate">
+          Mudar atividade
+        </q-btn>
       </div>
     </div>
   </div>
@@ -17,6 +20,9 @@ export default {
   methods: {
     start () {
       this.$socket.emit('start', {});
+    },
+    clearTemplate () {
+      this.$socket.emit('clear-template', {});
     }
   }
 };

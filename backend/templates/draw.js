@@ -8,13 +8,4 @@ let template = {
     }
 }
 
-module.exports = function (commonIncludes){
-    let {rooms, socket} = commonIncludes;
-    let newSession = Object.assign({}, template, commonIncludes);
-
-    newSession.gameSession = {};
-    newSession.currentRoom = rooms[socket.currentRoom];
-    newSession.roomId = socket.currentRoom;
-
-    return newSession;
-}
+module.exports = template;

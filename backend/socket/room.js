@@ -60,9 +60,17 @@ module.exports = function(commonIncludes){
     socket.on('select-template', function (payload) {
         if (!users[socket.id].isAdmin) { return false; } // TODO: fazer algo mais interessante que retornar nada pra nada
         if (!templates[payload]) { return false; } // TODO DEFINIR ERRO: TEMPLATE NÃO EXISTE
-        console.log(payload);
         rooms[socket.currentRoom].template = templates[payload];
-        io.in(socket.currentRoom).emit('room', rooms[socket.currentRoom] );
+        helpers.sendRoomInfo(socket.currentRoom);
+    });
+
+    /**
+     * Reverter escolha de template
+     */
+    socket.on('clear-template', function (payload) {
+        if (!users[socket.id].isAdmin) { return false; } // TODO: fazer algo mais interessante que retornar nada pra nada
+        delete rooms[socket.currentRoom].template;
+        helpers.sendRoomInfo(socket.currentRoom);
     });
 
     /**
@@ -71,8 +79,8 @@ module.exports = function(commonIncludes){
     socket.on('start', function (options) {
         if (!users[socket.id].isAdmin) { return false; } // TODO: fazer algo mais interessante que retornar nada pra nada
         const roomId = socket.currentRoom;
-        const gameTemplate = rooms[roomId].template.id;
-        const gameSession = require('../templates/' + gameTemplate)(commonIncludes);
+        const gameTemplate = rooms[roomId].template.id;        
+        const gameSession = require('../templates').load(gameTemplate, commonIncludes);        
 
         rooms[roomId].started = true;
         rooms[roomId].activeUsers = helpers.getUsers(roomId);

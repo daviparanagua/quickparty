@@ -43,7 +43,6 @@ import Lobby from 'components/Lobby';
 import UsersList from 'components/UsersList';
 import TemplateChooser from 'components/TemplateChooser';
 import registerSocketEvents from '../helpers/SocketEvents';
-import Draw from 'components/Draw';
 
 export default {
   name: 'Chat',
@@ -74,14 +73,15 @@ export default {
     },
     mainViewComponent () {
       if (!this.room.started) return 'Lobby';
-      return 'Draw';
+      return this.room.template.id;
     }
   },
   components: {
     UsersList,
     Lobby,
     TemplateChooser,
-    Draw
+    Draw: () => import('../components/Draw'),
+    Nothing: () => import('../components/Nothing')
   },
   created () {
     // Mostra carregamento (em x segundos: vide quasar.conf)
@@ -156,7 +156,6 @@ export default {
       this.$store.commit('addToChatHistory', this.addr);
     },
     stop () {
-      console.log('Parando');
       this.$socket.emit('stop');
     }
   }
