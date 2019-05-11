@@ -1,7 +1,7 @@
 <template>
-   <q-badge color="gray-2" class="q-pa-xs q-ma-xs">
+   <q-chip :color="chipColor" text-color="white" class="q-px-md q-ma-xs">
     {{username}}
-   </q-badge>
+   </q-chip>
 </template>
 
 <script>
@@ -9,6 +9,10 @@ export default {
   computed: {
     username () {
       return this.user ? this.user.user.username : '';
+    },
+    chipColor () {
+      if (this.isMe) { return 'primary'; }
+      return 'gray';
     }
   },
   props: ['user', 'isMe']
