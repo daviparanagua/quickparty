@@ -46,7 +46,7 @@ import TemplateChooser from 'components/TemplateChooser';
 import registerSocketEvents from '../helpers/SocketEvents';
 
 export default {
-  name: 'Chat',
+  name: 'Room',
   data: () => ({
     addr: '',
     firstLoad: true,

@@ -5,6 +5,12 @@
       <q-btn
         v-if="user.isAdmin"
         color= "primary"
+        @click= "doTest"
+        label= "Fazer"
+      ></q-btn>
+      <q-btn
+        v-if="user.isAdmin"
+        color= "primary"
         @click= "$emit('stop')"
         label= "Reiniciar"
       ></q-btn>
@@ -15,7 +21,13 @@
 <script>
 export default {
   props: ['user', 'room', 'users'],
-  sockets: {
+  methods: {
+    doTest () {
+      this.$socket.emit('session', {
+        action: 'test',
+        extraParameter: 'hehehe'
+      });
+    }
   }
 };
 </script>

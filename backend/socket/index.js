@@ -9,7 +9,7 @@ module.exports = function(io){
   let rooms = {};
   
   io.on('connection', function (socket) {
-    let commonIncludes = {io, socket, users, rooms};
+    let commonIncludes = {io, socket, users, rooms, currentSession: {}};
     const helpers = require('./helpers')(commonIncludes);
     commonIncludes.helpers = helpers;
 
