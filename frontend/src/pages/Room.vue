@@ -80,8 +80,8 @@ export default {
     UsersList,
     Lobby,
     TemplateChooser,
-    Draw: () => import('../components/Draw'),
-    Nothing: () => import('../components/Nothing')
+    Draw: () => import('../templates/Draw'),
+    Liar: () => import('../templates/Liar')
   },
   created () {
     // Mostra carregamento (em x segundos: vide quasar.conf)

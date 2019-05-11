@@ -24,7 +24,6 @@ export default {
   },
   sockets: {
     templates (templates) {
-      console.log(templates);
       this.templates = templates;
     }
   }

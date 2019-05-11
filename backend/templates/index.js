@@ -1,9 +1,9 @@
 let templateModule = {
-    'nothing': {
-        id: 'nothing',
-        name: 'Nada',
-        component: 'Nothing',
-        action_description: 'fazer nada'
+    'liar': {
+        id: 'liar',
+        name: 'O Mentiroso',
+        component: 'Liar',
+        action_description: 'jogar O Mentiroso'
     },
     'draw': {
         id: 'draw',
