@@ -20,6 +20,7 @@ module.exports = function(commonIncludes){
 
         // Salva no socket qual é a sala a que esta conectado
         socket.currentRoom = payload.addr;
+        currentRoom = payload.addr;
         if(helpers.isOwner()){
           users[socket.id].isAdmin = true;
         }
@@ -93,8 +94,7 @@ module.exports = function(commonIncludes){
      * 
      */
     socket.on('session', function (payload) {
-        console.log(payload);
-        currentSession[payload.action](payload);
+        currentSession[payload.action](payload, commonIncludes);
     });
 
     /**

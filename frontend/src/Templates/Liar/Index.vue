@@ -27,6 +27,11 @@ export default {
         extraParameter: 'hehehe'
       });
     }
+  },
+  sockets: {
+    session (payload) {
+      console.error(payload);
+    }
   }
 };
 </script>
