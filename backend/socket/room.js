@@ -93,6 +93,7 @@ module.exports = function(commonIncludes){
      * 
      */
     socket.on('session', function (payload) {
+        console.log(payload);
         currentSession[payload.action](payload);
     });
 

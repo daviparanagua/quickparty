@@ -20,11 +20,10 @@
 
 <script>
 export default {
-  props: ['user', 'room', 'users'],
+  props: ['user', 'room', 'users', 'sessionEmit'],
   methods: {
     doTest () {
-      this.$socket.emit('session', {
-        action: 'test',
+      this.sessionEmit('test', {
         extraParameter: 'hehehe'
       });
     }

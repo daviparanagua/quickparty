@@ -9,6 +9,7 @@
           :user = "user"
           :room = "room"
           :users = "users"
+          :sessionEmit = "sessionEmit"
           @stop = "stop"
         ></component>
       </div>
@@ -158,6 +159,10 @@ export default {
     },
     stop () {
       this.$socket.emit('stop');
+    },
+    sessionEmit (action, payload) {
+      payload.action = payload.action || action;
+      this.$socket.emit('session', payload);
     }
   }
 };
