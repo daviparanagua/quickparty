@@ -94,6 +94,7 @@ module.exports = function(commonIncludes){
      * 
      */
     socket.on('session', function (payload) {
+        if(!currentSession[payload.action] || isCallable(currentSession[payload.action])) { return false; }
         currentSession[payload.action](payload, commonIncludes);
     });
 
