@@ -1,9 +1,12 @@
 let template = {
     public: {},
     start: function () {
-        let activeUsers = this.currentRoom.activeUsers;
-        let randomUser = activeUsers[Math.floor(Math.random() * activeUsers.length)];
-        this.liar = randomUser;
+        let theLiar = this.randomParticipant();
+        this.addUserTag(theLiar, 'isLiar');
+        
+        console.log(this.tags);
+        console.log('------');
+        console.log(this.getUserTags(theLiar));
     },
     test: function (payload, {io, socket}) {
         console.log('event received');

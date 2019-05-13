@@ -5,7 +5,7 @@ let templateModule = {
         component: 'Liar',
         action_description: 'jogar O Mentiroso',
         players: {
-            min: 3,
+            min: 1,
             max: 15
         }
     },
@@ -31,6 +31,7 @@ Object.defineProperty(templateModule, 'load', {
     
         newSession.public = {};
         newSession.private = {};
+        newSession.tags = {};
         newSession.currentRoom = rooms[socket.currentRoom];
         newSession.roomId = socket.currentRoom;
     

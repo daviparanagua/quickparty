@@ -84,8 +84,8 @@ module.exports = function(commonIncludes){
         currentSession = require('../templates').load(gameTemplate, commonIncludes);        
 
         rooms[roomId].started = true;
-        rooms[roomId].activeUsers = helpers.getUsers(roomId);
         rooms[roomId].session = currentSession;
+        currentSession.activeUsers = helpers.getUsers(roomId);
         currentSession.start();
         helpers.sendRoomInfo(socket.currentRoom);
     });
@@ -94,7 +94,7 @@ module.exports = function(commonIncludes){
      * 
      */
     socket.on('session', function (payload) {
-        if(!currentSession[payload.action] || isCallable(currentSession[payload.action])) { return false; }
+        if(!currentSession[payload.action] || typeof currentSession[payload.action] != 'function') { return false; }
         currentSession[payload.action](payload, commonIncludes);
     });
 
