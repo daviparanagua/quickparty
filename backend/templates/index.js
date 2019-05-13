@@ -15,7 +15,7 @@ let templateModule = {
         component: 'Draw',
         action_description: 'participar de um sorteio',
         players: {
-            min: 2
+            min: 1
         }
     }
 };
@@ -25,10 +25,12 @@ Object.defineProperty(templateModule, 'load', {
     configurable: false,
     value: function (templateId, commonIncludes){
         let {rooms, socket} = commonIncludes;
+        let commonHelpers = require('./roomHelpers');
         let template = require('./' + templateId);
-        let newSession = Object.assign({}, template, commonIncludes);
+        let newSession = Object.assign({}, template, commonHelpers, commonIncludes);
     
-        newSession.session = {};
+        newSession.public = {};
+        newSession.private = {};
         newSession.currentRoom = rooms[socket.currentRoom];
         newSession.roomId = socket.currentRoom;
     
