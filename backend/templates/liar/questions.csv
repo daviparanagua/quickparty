@@ -1,0 +1,296 @@
+id,title,desc,action,level
+1,"Levante a mão se você gosta de pão integral","",1,1
+2,"Levante a mão se você gosta de chocolate branco","",1,1
+3,"Levante a mão se você tem mais de um celular","",1,1
+4,"Levante a mão se você se acha bonito","",1,1
+5,"Aponte para a pessoa mais inteligente","",3,1
+6,"Aponte para a pessoa mais bonita","",3,1
+7,"Aponte para a pessoa que tem mais dinheiro","",3,1
+8,"Levante a mão se você já ficou bêbado","",1,2
+9,"Levante a mão se você sabe cozinhar bem","",1,1
+10,"Levante a mão se você toca algum instrumento musical","",1,1
+11,"Levante a mão se você possui alguma arma","",1,2
+12,"Aponte para a pessoa mais estabanada","",3,2
+13,"Levante a mão se você já fumou","",1,2
+14,"Aponte pra pessoa que mais bebe","",3,2
+15,"Levante um dedo para cada droga diferente que você já consumiu","(Incluindo álcool e cigarro)",4,3
+16,"Aponte pra pessoa com mais nudes no celular","",3,3
+17,"Aponte pra pessoa mais estressada","",3,1
+18,"Aponte pra quem é mais viciado em pornô","",3,3
+19,"Levanta a mão se você tem mais de R$ 200 na carteira","",1,2
+20,"Levante a mão se você já fez sexo em público","",1,4
+21,"Levante a mão se você já entrou em um motel","",1,3
+22,"Aponte para a pessoa que mais transou","",3,3
+23,"Aponte para a pessoa mais gay","",3,2
+24,"Aponte para a pessoa mais faladora","",3,2
+25,"Aponte o dedo pra quem gosta mais de café","",3,1
+26,"Aponte o dedo pra quem você acha que é o mentiroso","",3,1
+27,"Levante a mão se você já tirou comida do lixo e comeu","",1,1
+28,"Aponte para a pessoa que você gosta mais","",3,2
+29,"Levante a mão se você já bebeu até ficar insconsciente","",1,3
+30,"Levante a mão se já apagou um post em uma rede social por ter poucas curtidas","",1,2
+31,"Levante a mão se você já roubou um objeto de uma loja","",1,2
+32,"Levante a mão se você já chamou o nome errado durante o sexo","",1,4
+33,"Levante a mão se já ficou com alguém da sua família","",1,4
+34,"Levante a mão se já enviou uma mensagem erótica para o número errado","",1,4
+35,"Levante a mão se já mandou nudes pra pessoa errada","",1,3
+36,"Aponte para a pessoa que gosta de pessoas mais velhas","",3,3
+37,"Levante a mão se já pensou que podia ter uma DST","",1,4
+38,"Levante a mão se você já usou um objeto comum como brinquedo sexual e depois o colocou de volta","",1,4
+39,"Levante a mão se você já fez sexo a 3","",1,4
+40,"Aponte pra pessoa com quem você faria sexo","",3,4
+41,"Levante a mão se você já se exibiu na webcam","",1,4
+42,"Levante a mão se você já foi infiel","",1,4
+43,"Levante a mão se você já nadou pelado","",1,4
+44,"Levante a mão se você já ficou com o(a) ex de um(a) amigo(a)","",1,4
+45,"Levante a mão se você já ficou com alguém desta roda","",1,4
+46,"Aponte pra pessoa mais desorganizada","",3,2
+47,"Levante um dedo para cada pessoa diferente com quem você transou (ou 5,para mais de 5)","",4,4
+48,"Levante a mão se já comeu pra caramba e depois disse que ia começar uma dieta,mas não começou ","",1,1
+49,"Levante a mão se já disse que ia parar de ser trouxa e continua sendo.","",1,2
+50,"Levante a mão se você já repetiu de ano","",1,1
+51,"Aponte para a pessoa mais trouxa","",3,2
+52,"Levante a mão se você já beijou este ano","",1,3
+53,"Levante a mão se você já brigou com alguém para defender algum ídolo","",1,2
+54,"Levante a mão se já recebeu cantadas","",1,2
+55,"Levante a mão se você já quis ser uma princesa","",1,1
+56,"Levante a mão se você,num relacionamento,já foi aquele que correu atrás","",1,2
+57,"Levante a mão se você já entrou ou manteve um relacionamento só pelo sexo","",1,3
+58,"Levante a mão se você gosta de dançar","",1,1
+59,"Levante a mão se você tem ou já teve o hábito de roer unhas","",1,1
+60,"Levante a mão se você costuma se masturbar mais de 5x por semana","",1,4
+61,"Aponte para quem mais se masturba","",3,4
+62,"Aponte para quem canta melhor","",3,1
+63,"Aponte para quem cozinha melhor","",3,1
+64,"Levante um dedo para cada idioma que você fala","",4,1
+65,"Levante a mão se você gosta de chá preto","",1,1
+66,"Levante a mão se você gosta ou gostaria de ser vegetariano","",1,1
+67,"Levante a mão se você gosta de jogos","",1,1
+68,"Levante a mão se você canta no chuveiro","",1,1
+69,"Levante a mão se você fica um dia sem tomar banho quando está frio","",1,1
+70,"Aponte para a pessoa que come mais","",3,1
+71,"Levante um dedo para o máximo de pessoas que você já beijou num mesmo dia (ou 5 para mais de 5)","",4,3
+72,"Levante a mão se você já contraiu uma DST","",1,3
+73,"Aponte para quem dança sozinho,mesmo sem música","",3,1
+74,"Levante a mão se você assiste desenhos animados","",1,1
+75,"Levante a mão se você tem medo de filmes de terror","",1,2
+76,"Aponte para quem é mais medroso","",3,1
+77,"Aponte para quem tem mais medo de filmes de terror","",3,2
+78,"Aponte para quem é mais preguiçoso","",3,1
+79,"Aponte para a pessoa mais teimosa","",3,1
+80,"Levante a mão se você já ficou com alguém e guarda segredo","",1,3
+81,"Levante a mão se você já terminou um relacionamento bloqueando a pessoa","",1,3
+82,"Levante a mão se você já viajou para o exterior","",1,1
+83,"Levante um dedo para cada instrumento musical que você tem","",4,1
+84,"Levante um dedo para cada xícara de café que você costuma tomar por dia","",4,1
+85,"Levante um dedo para cada namorado(a) que você teve (ou 5 para mais de 5)","",4,2
+86,"Levante um dedo para cada amigo que você gostaria de ficar,mas não pode (ou tentou)","",4,3
+87,"Levante um dedo para cada esporte que você pratica ou praticou","",4,1
+88,"Levante um dedo para cada vez que você usa uma mesma camisa sem lavar","",4,2
+89,"Levante um dedo para cada amigo que você perdeu contato e gostaria de recuperar (ou 5 para mais de 5)","",4,2
+90,"Levante um dedo para cada livro que você leu no último mês (ou 5 para mais de 5)","",4,1
+91,"Levante a mão se você já brigou na escola","",1,2
+92,"Levante a mão se você já beijou alguém escondido na escola","",1,3
+93,"Levante um dedo para cada pessoa com quem você já transou ao mesmo tempo (ou 5 para mais de 5)","",4,4
+94,"Levante a mão se você já transou escondido na escola/curso/faculdade","",1,4
+95,"Levante a mão se você já ficou com alguém e se arrependeu depois","",1,3
+96,"Aponte para a pessoa que mais gosta de música","",3,1
+97,"Aponte para a pessoa mais criativa","",3,1
+98,"Aponte para a pessoa mais nerd","",3,1
+99,"Aponte para a pessoa que mais gosta de desenhos animados","",3,1
+100,"Levante a mão se você já comprou algum livro que não leu 1 ano depois de comprar","",1,1
+101,"Aponte para a pessoa que mais lê","",3,1
+102,"Aponte para a pessoa que menos lê","",3,2
+103,"Aponte para a pessoa que mais gosta de salada","",3,1
+104,"Aponte para a pessoa que come mais bobagens","",3,1
+105,"Aponte para a pessoa mais depravada","",3,4
+106,"Levante a mão se você já fez sexo dentro de um carro","",1,4
+107,"Levante a mão se você já fez sexo numa mata ou floresta","",1,4
+108,"Levante a mão se você já foi acordado por alguém fazendo sexo muito alto","",1,4
+109,"Levante a mão se você já comeu ração de gato ou cachorro","",1,1
+110,"Levante a mão se você já fez sexo no elevador","",1,4
+111,"Levante a mão se você já jogou strip poker","",1,4
+112,"Levante a mão se você já colou numa prova","",1,2
+113,"Levante a mão se você já fez sexo usando algo comestível","",1,4
+114,"Levante a mão se já se arrependeu de ter feito sexo com alguém","",1,3
+115,"Levante a mão se você já fez sexo pelo telefone ou internet","",1,3
+116,"Levante a mão se você já foi expulso de um bar ou boate","",1,3
+117,"Levante a mão se você já tomou banho com alguém","",1,3
+118,"Levante a mão se você já esteve em um strip club ou sauna","",1,3
+119,"Levante a mão se você já engoliu fluidos sexuais","",1,4
+120,"Levante a mão se você já usou o banheiro de porta aberta","",1,3
+121,"Aponte para quem se veste melhor","",3,2
+122,"Levante a mão se você soltou um pum desde que este jogo começou","",1,2
+123,"Levante a mão se você acredita em fantasmas","",1,1
+124,"Levante a mão se você acredita em um deus","",1,2
+125,"Levante a mão se você já cuspiu na comida de alguém","",1,2
+126,"Levante a mão se você usa algum amuleto da sorte","",1,2
+127,"Aponte para a pessoa contra quem você teria mais chances de vencer numa luta","",3,2
+128,"Levante um dedo para cada ingrediente extra que você costuma colocar no café","",4,1
+129,"Faça a expressão que faria ao ganhar 1 milhão de reais","",2,1
+130,"Faça a expressão que faria ao comer algo estragado","",2,1
+131,"Faça a expressão que faria ao comer pipoca","",2,1
+132,"Faça a sua melhor cara de paisagem","",2,1
+133,"Faça a expressão que faria ao ver a pessoa que gosta tirando a roupa para você","",2,4
+134,"Faça a expressão que faria no meio do Carnaval","",2,2
+135,"Levante um dedo para cada vez que fez suas necessidades no mato","",4,2
+136,"Levante um dedo para cara carro que você já teve","",4,2
+137,"Levante um dedo para cada casa diferente que você já morou","",4,2
+138,"Levante um dedo para cada cidade diferente que você já morou","",4,1
+139,"Aponte para a pessoa que mais provavelmente tem uma roupa de baixo vermelha","",3,3
+140,"Aponte para a pessoa que mais provavelmente tem um brinquedo sexual","",3,3
+141,"Aponte para a pessoa que mais provavelmente tem um video game","",3,1
+142,"Aponte para a pessoa que mais provavelmente tem uma calça de couro","",3,2
+143,"Faça a expressão que faria ao descobrir que foi traído(a)","",2,3
+144,"Faça a expressão que faria ao encontrar seu namorado(a) na cama com outro(a)","",2,4
+145,"Faça a expressão que faria ao olhar a Torre Eiffel","",2,1
+146,"Faça a expressão que faz ao ouvir sua música favorita","",2,1
+147,"Faça a expressão ao ouvir alguém te falando algo que sabe ser mentira","",2,2
+148,"Faça a expressão que faria ao encontrar dinheiro perdido no bolso de uma calça","",2,2
+149,"Faça a expressão que faria ao estar prestes a olhar o resultado de um concurso","",2,2
+150,"Faça a expressão que faria ao notar que esqueceu seu celular no banheiro","",2,2
+151,"Faça a expressão que faria ao encontrar uma barata","",2,1
+152,"Faça a expressão que faria ao tocar a campainha depois de pedir pizza","",2,1
+153,"Faça a expressão que faz ao acordar de manhã","",2,1
+154,"Faça a expressão que faria ao assistir a uma maratona de Harry Potter","",2,1
+155,"Faça a expressão que faria ao assistir a uma maratona de Senhor dos Anéis","",2,1
+156,"Faça a expressão que faria ao assistir a uma maratona de filmes de terror","",2,1
+157,"Faça a expressão que faria se estivesse andando na rua e um cachorro o visse e andasse em sua direção","",2,1
+158,"Faça a expressão que faria ao encontrar um rato em casa","",2,2
+159,"Faça a expressão que faria ao perde num jogo","",2,1
+160,"Aponte para a pessoa que iria querer no seu time num jogo de cartas","",3,2
+161,"Aponte para a pessoa que iria querer no seu time num jogo de futebol","",3,2
+162,"Aponte para a pessoa que iria querer no seu time num jogo de basquete","",3,1
+163,"Aponte para a pessoa que iria querer no seu time num jogo de perguntas e respostas","",3,1
+164,"Aponte para a pessoa que iria querer no seu time num jogo de desenho","",3,1
+165,"Aponte para a pessoa que iria querer no seu time num jogo de mímica","",3,1
+166," Aponte para a pessoa que iria querer que cantasse contigo num karaokê","",3,1
+167,"Levante um dedo para cada par de sapatos e tênis que você tem","",4,1
+168,"Levante um dedo para cada boné e chapéu que você tem","",4,1
+169,"Levante um dedo para cada relógio que você tem","",4,1
+170,"Levante um dedo para cada aparelho celular que você tem","",4,1
+171,"Levante um dedo para cada número de telefone que você tem","",4,1
+172,"Levante um dedo para cada emprego que você teve","",4,2
+173,"Levante um dedo para cada vez que brigou (fisicamente) com alguém ","",4,2
+174,"Levante um dedo para cada vez que você assistiu todos os filmes de Senhor dos Anéis","",4,1
+175,"Levante um dedo para cada vez que você assistiu todos os filmes de Harry Potter","",4,1
+176,"Levante um dedo para cada vez que você assistiu A Lagoa Azul","",4,1
+177,"Levante a mão se você ainda assiste Chaves (mesmo de vez em quando)","",1,1
+178,"Levante a mão se você assiste novelas","",1,1
+179,"Levante a mão se você assiste novelas da Record","",1,1
+180,"Levante a mão se você assiste novelas mexicanas","",1,1
+181,"Levante a mão se você já teve fantasias com alguém neste jogo","",1,4
+182,"Levante a mão se você já esteve em um acidente de carro","",1,2
+183,"Aponte para a pessoa que mais provavelmente teria um acidente de carro","",3,2
+184,"Levante a mão se você já foi pego numa pegadinha de primeiro de abril","",1,2
+185,"Levante a mão se você já tentou esconder um chupão","",1,3
+186,"Levante a mão se você já ficou com alguém sob a luz das estrelas","",1,3
+187,"Levante um dedo para vez que tomou banho esta semana","",4,2
+188,"Faça a expressão que faria ao ser atacado por um lobisomem sexy","",2,2
+189,"Faça a expressão que faria ao ser atacado por um vampiro brilhante","",2,2
+190,"Faça a expressão que faria ao ser atacado por um homem-morcego","",2,2
+191,"Faça a expressão que faria ao ver o Batman dançando tango","",2,1
+192,"Faça a expressão que faz numa cabine de votação","",2,2
+193,"Faça a expressão que faria se te servissem camarão frito para comer","",2,1
+194,"Faça a expressão que faria se te servissem batata frita","",2,1
+195,"Faça a expressão que faria se te servissem hambúrguer de soja","",2,1
+196,"Faça a expressão que faria se te servissem nuggets","",2,1
+197,"Faça a expressão que faria se te servissem um sanduíche integral","",2,1
+198,"Faça a expressão que faria se te servissem peixe assado","",2,1
+199,"Faça a expressão que faria se te servissem uma salada de frutas","",2,1
+200,"Faça a expressão que faria ao ganhar um livro de culinária de presente","",2,1
+201,"Faça a expressão que faria ao ganhar um livro de Harry Potter de presente","",2,1
+202,"Faça a expressão que faria ao ganhar um livro de economia de presente","",2,1
+203,"Faça a expressão que faria ao ganhar um livro do Kama Sutra de presente","",2,3
+204,"Faça a expressão que faria ao ganhar um mangá de presente","",2,2
+205,"Faça a expressão que faria ao ganhar um HQ de presente","",2,2
+206,"Faça a expressão que faria ao ganhar uma revista da Turma da Mônica de presente","",2,1
+207,"Faça a expressão que faria ao ganhar um CD da Xuxa de presente","",2,1
+208,"Faça a expressão que faria ao ganhar uma calça jeans de presente","",2,2
+209,"Faça a expressão que faria ao ganhar um par de meias de presente","",2,2
+210,"Faça a expressão que faria ao ganhar uma cueca/calcinha de presente","",2,2
+211,"Faça a expressão que faria ao ganhar um carro de presente","",2,1
+212,"Faça a expressão que faria ao chegar a sua encomenda da China","",2,2
+213,"Faça a expressão que faria ao ganhar um bambolê de presente","",2,1
+214,"Faça a expressão que faria ao ganhar um carro de miniatura de presente","",2,1
+215,"Levante um dedo para cada ano que você não vai ao dentista","",4,2
+216,"Levante a mão se você já usou ou usa aparelho nos dentes","",1,1
+217,"Levante a mão se você já usou ou usa óculos","",1,1
+218,"Levante o número de dedos que você conseguiria colocar confortavelmente na boca","",4,2
+219,"Levante a mão se você já dormiu no cinema","",1,1
+220,"Levante a mão se você já transou no cinema","",1,4
+221,"Levante a mão se você já beijou alguém no cinema","",1,3
+222,"Levante a mão se você já saiu do cinema no meio de um filme","",1,2
+223,"Levante a mão se você já dormiu no meio do sexo","",1,4
+224,"Levante a mão se você já fez uma cirurgia","",1,2
+225,"Levante a mão se você já desmaiou","",1,2
+226,"Levante a mão se você já doou sangue","",1,2
+227,"Levante a mão se você já teve que receber sangue","",1,2
+228,"Aponte para a pessoa que você gostaria de poder ler os pensamentos","",3,2
+229,"Aponte para a pessoa que mais gostaria de poder se teletransportar","",3,2
+230,"Aponte para a pessoa que mais gostaria de poder ficar invisível","",3,2
+231,"Aponte para a pessoa que mais gostaria de poder ficar voar","",3,2
+232,"Aponte para a pessoa que mais gostaria de ser o Batman","",3,2
+233,"Aponte para a pessoa que mais provavelmente é doadora de órgãos","",3,2
+234,"Aponte para a pessoa que mais provavelmente adotaria uma criança","",3,2
+235,"Aponte para a pessoa que mais provavelmente adotaria um animal abandonado","",3,2
+236,"Aponte para a pessoa que mais provavelmente deixaria de pagar 10% de gorjeta no restaurante","",3,2
+237,"Aponte para a pessoa que mais se parece com Tom Cruise","",3,2
+238,"Aponte para a pessoa que mais se parece com Angeline Jolie","",3,2
+239,"Aponte para a pessoa que mais se parece com Leonardo di Caprio","",3,2
+240,"Aponte para a pessoa que mais se parece com Denzel Washington","",3,2
+241,"Aponte para a pessoa que mais se parece com Madonna","",3,2
+242,"Aponte para a pessoa que mais provavelmente tem poderes mágicos secretos","",3,2
+243,"Aponte para a pessoa que tem mais segredos","",3,2
+244,"Faça a expressão que faz quando seu celular está sem sinal","",2,2
+245,"Faça a expressão que faz quando seu celular está sem bateria","",2,2
+246,"Levante um dedo para cada cárie que teve enquanto adulto","",4,2
+247,"Levante um dedo para cada vez que foi ao médico no último mês","",4,2
+248,"Levante um dedo para cada bebida alcoólica que tomou hoje","",4,2
+249,"Aponte para a pessoa que mais provavelmente escreve um textão no Facebook","",3,3
+250,"Aponte para a pessoa que mais provavelmente posta fotos no Instagram só pra sensualizar","",3,2
+251,"Aponte para a pessoa que mais gosta de se passar por cult","",3,2
+252,"Aponte para a pessoa que tem mais apps de namoro/pegação instalados","",3,3
+253,"Aponte para a pessoa que melhor saberia como fazer um pudim","",3,2
+254,"Aponte para a pessoa que melhor saberia como montar um móvel","",3,2
+255,"Aponte para a pessoa que melhor saberia como instalar um ventilador de teto","",3,2
+256,"Aponte para a pessoa que melhor saberia como consertar um computador","",3,2
+257,"Aponte para a pessoa que melhor saberia como resolver um problema de cálculo","",3,2
+258,"Aponte para a pessoa que melhor escalaria uma montanha","",3,2
+259,"Aponte para a pessoa que melhor se salvaria de um naufrágio","",3,2
+260,"Aponte para a pessoa que melhor pilotaria um avião numa emergência","",3,2
+261,"Aponte para o pior dançarino","",3,2
+262,"Aponte para a pessoa com a camisa mais legal","",3,2
+263,"Levante a mão se você já urinou no chuveiro","",1,2
+264,"Levante a mão se você já tomou banho na academia","",1,2
+265,"Levante a mão se você tem algum creme no cabelo","",1,2
+266,"Levante a mão se você usa condicionador sempre que lava o cabelo","",1,2
+267,"Levante a mão se você lava o cabelo sempre que toma banho","",1,2
+268,"Levante a mão se você fica horas assistindo a vídeos no YouTube","",1,2
+269,"Levante a mão se você já apareceu num sex tape disponível na internet","",1,4
+270,"Levante a mão se você já apareceu num vídeo no YouTube","",1,2
+271,"Levante a mão se você dorme com um animal de pelúcia","",1,1
+272,"Levante a mão se você sofreu bullying na escola","",1,2
+273,"Levante a mão se você fazia bullying na escola","",1,2
+274,"Levante a mão se você já fez uma doação","",1,2
+275,"Levante a mão se você já fugiu (ou tentou fugir) de casa","",1,2
+276,"Faça a expressão que faria ao ganhar flores de presente","",2,2
+277,"Faça a expressão que faria ao dar de cara com Papai Noel caindo da chaminé","",2,2
+278,"Faça a expressão que faria ao perder parte de um trabalho porque o computador travou","",2,2
+279,"Faça a expressão que faria ao ficar perdido na floresta","",2,2
+280,"Faça a expressão que faria ao receber nudes da pessoa que gosta","",2,3
+281,"Faça a expressão que faria ao ganhar um brinquedo sexual de presente","",2,3
+282,"Faça a expressão que faria ao ganhar algemas (de ""brinquedo"") de presente","",2,4
+283,"Faça a expressão que faria ao ganhar um chicote (de ""brinquedo"") de presente","",2,4
+284,"Faça a expressão que faria ao perder o voo porque chegou atrasado no aeroporto","",2,2
+285,"Faça a expressão que faria ao ter um idoso desconhecido puxando papo contigo no ônibus","",2,2
+286,"Faça a expressão que faria ao ver algum desconhecido tropeçando na rua","",2,2
+287,"Faça a expressão que faria ao ver um idoso desconhecido tropeçando na rua","",2,2
+288,"Faça a expressão que faria ao ver um carro desgovernado indo na sua direção","",2,2
+289,"Faça a expressão que faria ao perder o ponto porque o motorista do ônibus não parou","",2,2
+290,"Faça a expressão que faria ao ver que o(a) motorista do Uber é bonito(a)","",2,3
+291,"Faça a expressão que faria se pedisse Coca-cola e te trouxessem Pepsi","",2,2
+292,"Faça a expressão que faria ao acordar 5h da manhã","",2,2
+293,"Faça a expressão que faria se um gato começasse a segui-lo(a) na rua","",2,2
+294,"Faça a expressão que faria se um cachorro começasse a segui-lo(a) na rua","",2,2
+295,"Faça a expressão que faria se um estranho lhe desse um abraço inesperado,na rua","",2,2
