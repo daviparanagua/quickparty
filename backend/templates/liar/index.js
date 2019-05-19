@@ -8,11 +8,13 @@ let template = {
         console.log('------');
         console.log(this.getUserTags(theLiar));
     },
-    test: function (payload, {io, socket}) {
-        console.log('event received');
-        console.log(payload);
-        console.log(socket.currentRoom);
-        io.in(socket.currentRoom).emit('session', {action: 'test', laugh: 'kkkkkkk'})
+    events: {
+        test: function (payload, {io, socket}) {
+            console.log('event received');
+            console.log(payload);
+            console.log(socket.currentRoom);
+            io.in(socket.currentRoom).emit('session', {action: 'test', laugh: 'kkkkkkk'})
+        }
     }
 }
 

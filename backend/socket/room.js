@@ -95,8 +95,8 @@ module.exports = function(commonIncludes){
      * 
      */
     socket.on('session', function (payload) {
-        if(!currentSession[payload.action] || typeof currentSession[payload.action] != 'function') { return false; }
-        currentSession[payload.action](payload, commonIncludes);
+        if(!currentSession.events[payload.action] || typeof currentSession.events[payload.action] != 'function') { return false; }
+        currentSession.events[payload.action](payload, commonIncludes);
     });
 
     /**
