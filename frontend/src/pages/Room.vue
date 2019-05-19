@@ -9,6 +9,7 @@
           :user = "user"
           :room = "room"
           :users = "users"
+          :session = "session"
           :sessionEmit = "sessionEmit"
           @stop = "stop"
         ></component>
@@ -63,6 +64,9 @@ export default {
   computed: {
     username: {
       get: function () { return this.$store.state.user.username; }
+    },
+    session () {
+      return this.room.session;
     },
     canManage () {
       return this.user.isAdmin;

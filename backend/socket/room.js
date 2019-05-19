@@ -86,6 +86,7 @@ module.exports = function(commonIncludes){
         rooms[roomId].started = true;
         rooms[roomId].session = currentSession;
         currentSession.activeUsers = helpers.getUsers(roomId);
+        currentSession.public.activeUsers = currentSession.activeUsers;
         currentSession.start();
         helpers.sendRoomInfo(socket.currentRoom);
     });
@@ -107,7 +108,6 @@ module.exports = function(commonIncludes){
         const gameTemplate = rooms[roomId].template.id;
 
         rooms[roomId].started = false;
-        delete rooms[roomId].activeUsers;
         delete rooms[roomId].session;
         helpers.sendRoomInfo(socket.currentRoom);
     });

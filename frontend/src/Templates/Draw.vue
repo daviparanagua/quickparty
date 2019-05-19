@@ -4,7 +4,7 @@
       O escolhido foi
       <h5>{{chosenOne}}</h5>
       <div>
-        Participaram: {{ room.activeUsers.map((item) => item.user.username).join(', ') }}
+        Participaram: {{ session.activeUsers.map((item) => item.user.username).join(', ') }}
       </div>
       <q-btn
         v-if="user.isAdmin"
@@ -18,10 +18,10 @@
 
 <script>
 export default {
-  props: ['user', 'room', 'users'],
+  props: ['user', 'room', 'users', 'session'],
   computed: {
     chosenOne () {
-      return this.room.session.chosenUser.user.username;
+      return this.session.chosenUser.user.username;
     }
   },
   sockets: {
