@@ -24,12 +24,15 @@ Object.defineProperty(templateModule, 'load', {
     enumerable: false,
     configurable: false,
     value: function (templateId, commonIncludes){
-        let {rooms, socket} = commonIncludes;
+        let {rooms, socket, users} = commonIncludes;
         let commonHelpers = require('./roomHelpers');
         let template = require('./' + templateId);
-        let newSession = Object.assign({}, template, commonHelpers, commonIncludes);
+        let newSession = Object.assign({}, template, commonHelpers);
     
+        newSession.currentSession = newSession;
+        newSession.isSession = true;
         newSession.public = {};
+        newSession.restricted = {};
         newSession.private = {};
         newSession.tags = {};
         newSession.currentRoom = rooms[socket.currentRoom];

@@ -119,7 +119,12 @@ export default {
       this.$socket.emit('authorize');
     },
     room (payload) {
+      console.log('updateroom');
       this.room = payload;
+    },
+    roomSession (payload) {
+      console.log('roomsession');
+      this.room.session = payload;
     },
     'join-accepted': function (payload) {
       this.user = payload.user;

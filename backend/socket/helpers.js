@@ -33,7 +33,7 @@ module.exports = function({io, socket, users, rooms}){
     helpers.getUsers = function(room){
         if(!socket.adapter.rooms[room]){ return {}; }
 
-        return Object.keys(socket.adapter.rooms[room].sockets).map((socketId) => users[socketId] );
+        return Object.keys(socket.adapter.rooms[room].sockets).map((socketId) => Object.assign(users[socketId], {'socketId': socketId}) );
     }
 
     /**
@@ -52,7 +52,6 @@ module.exports = function({io, socket, users, rooms}){
      */
     helpers.getRoom = function(room){
         if(!rooms[room]){ return {}; }
-
         return rooms[room];
     }
 
@@ -63,17 +62,28 @@ module.exports = function({io, socket, users, rooms}){
      */
     
     helpers.filterRoomInfo = function (room) {
-        if (room.session) { room.session = room.session.public; }
-        return room;
+        let roomData = Object.assign({}, room);
+        if (roomData.session) { roomData.session = roomData.session.public; }
+        return roomData;
     }
 
-     /**
-     * Envia aos participantes de uma sala a definição atual da sala
+    /**
+     * Filtra os dados de uma sala
+     * 
+     * @param {*} room 
+     */
+    
+    helpers.getFilteredRoomInfo = function (room) {
+        return helpers.filterRoomInfo(helpers.getRoom(room));
+    }
+
+    /**
+     * Envia aos participantes de uma sala a definição atual da sala completa (incluindo a sessão)
      * 
      * @param {*} room 
      */
     helpers.sendRoomInfo = function (room = socket.currentRoom){
-        io.in(room).emit('room', helpers.filterRoomInfo(helpers.getRoom(room)));
+        io.in(room).emit('room', helpers.getFilteredRoomInfo(room));
     }
 
     /**

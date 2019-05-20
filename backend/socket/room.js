@@ -1,7 +1,8 @@
 const templates = require('../templates');
 
 module.exports = function(commonIncludes){
-    let {io, socket, users, rooms, helpers, currentSession} = commonIncludes;
+    let {io, socket, users, rooms} = commonIncludes;
+    const helpers = require('./helpers')(commonIncludes);
 
     /**
      * join-request: Solicitação de entrada em sala
@@ -20,7 +21,8 @@ module.exports = function(commonIncludes){
 
         // Salva no socket qual é a sala a que esta conectado
         socket.currentRoom = payload.addr;
-        currentRoom = payload.addr;
+        commonIncludes.currentUser = users[socket.id];
+
         if(helpers.isOwner()){
           users[socket.id].isAdmin = true;
         }
@@ -30,17 +32,19 @@ module.exports = function(commonIncludes){
 
         // Entrar na sala
         socket.join(payload.addr);
+        // Obtém dados da sessão atual pro usuário
+        if(rooms[socket.currentRoom].session) commonIncludes.currentSession = rooms[socket.currentRoom].session;
         
         // Sinalizar aceite do participante
         socket.emit('join-accepted', {
           addr: payload.addr,
           user: users[socket.id],
-          room: helpers.getRoom(payload.addr)
+          room: helpers.getFilteredRoomInfo(payload.addr)
         });
 
         // Renderizar tela inicial
         socket.emit('render', {
-        content: helpers.render(payload.addr)
+            content: helpers.render(payload.addr)
         });
 
         // Notificar demais participantes da entrada
@@ -81,13 +85,12 @@ module.exports = function(commonIncludes){
         if (!users[socket.id].isAdmin) { return false; } // TODO: fazer algo mais interessante que retornar nada pra nada
         const roomId = socket.currentRoom;
         const gameTemplate = rooms[roomId].template.id;        
-        currentSession = require('../templates').load(gameTemplate, commonIncludes);        
-
+        rooms[roomId].session = require('../templates').load(gameTemplate, commonIncludes);
+        rooms[roomId].session.activeUsers = helpers.getUsers(roomId);
+        rooms[roomId].session.public.activeUsers = rooms[roomId].activeUsers;
         rooms[roomId].started = true;
-        rooms[roomId].session = currentSession;
-        currentSession.activeUsers = helpers.getUsers(roomId);
-        currentSession.public.activeUsers = currentSession.activeUsers;
-        currentSession.start();
+        currentSession = rooms[roomId].session;
+        currentSession.start(commonIncludes);
         helpers.sendRoomInfo(socket.currentRoom);
     });
 
@@ -96,7 +99,7 @@ module.exports = function(commonIncludes){
      */
     socket.on('session', function (payload) {
         if(!currentSession.events[payload.action] || typeof currentSession.events[payload.action] != 'function') { return false; }
-        currentSession.events[payload.action](payload, commonIncludes);
+        currentSession.events[payload.action].call(currentSession, payload, commonIncludes);
     });
 
     /**

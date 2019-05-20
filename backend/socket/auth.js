@@ -4,7 +4,10 @@ const uuid = require('uuid/v4');
 const jwtSecret = 'IstoEUmaPessimaIdeiaMasFuncionaPorAgora'; // TODO: Migrar para forma mais segura
 const adminPassword = 'senhasecreta';
 
-module.exports = function({io, socket, users, rooms, helpers}){
+module.exports = function(commonIncludes){
+    let {io, socket, users} = commonIncludes;
+    const helpers = require('./helpers')(commonIncludes);
+
     // Registrar usuário
     users[socket.id] = {id: socket.id};    
 

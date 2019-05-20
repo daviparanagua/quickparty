@@ -1,9 +1,14 @@
 <template>
   <div class="row full-height items-center justify-center">
     <div class="col-sm-12 text-center">
-      Nada feito
+      <div v-if="session.currentQuestion">
+        <div class="question">{{session.currentQuestion.title}}</div>
+        <div class="action">{{session.currentQuestion.action}}</div>
+      </div>
+      <div>
+        Aguarde...
+      </div>
       <q-btn
-        v-if="user.isAdmin"
         color= "primary"
         @click= "doTest"
         label= "Fazer"
@@ -20,7 +25,7 @@
 
 <script>
 export default {
-  props: ['user', 'room', 'users', 'sessionEmit'],
+  props: ['user', 'room', 'users', 'session', 'sessionEmit'],
   methods: {
     doTest () {
       this.sessionEmit('test', {

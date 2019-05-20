@@ -1,4 +1,4 @@
-module.exports = function({io, socket, users, rooms, games, helpers}){
+module.exports = function({socket, users, rooms}){
     /**
      * Lista de salas - função administrativa
      */
