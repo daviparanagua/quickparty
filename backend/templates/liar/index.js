@@ -28,8 +28,7 @@ let template = {
     nextQuestion ({currentUser}) {
         let selectedQuestion = this.questions[Math.floor(Math.random() * this.questions.length)];
         this.currentQuestion = selectedQuestion;
-        this.setRestrictedData(currentUser, selectedQuestion);
-        //this.sendSessionInfo();
+        this.setRestrictedData(currentUser, {question: selectedQuestion});        
     },
     sendSessionInfo () {
         let allinfo = this.public;

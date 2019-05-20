@@ -29,25 +29,26 @@ module.exports = {
     setRestrictedData (user, info) {
         let userId = user.id ? user.id : user;
         
-        if(!this.isParticipant(user)){return false;}
+        if(!this.isParticipant(user)){throw new Error('User does not belong to room');}
 
         if(!this.restricted[userId]) this.restricted[userId] = {}; // Cria objeto, se não existir.
-        Object.assign(this.restricted[userId], info);
+        this.restricted[userId] = Object.assign(this.restricted[userId], info);
     },
     getUnrestrictedData (user, info) {
         let userId = user.id ? user.id : user;
         let unrestritedData = {};
 
         for (restrictedUser in this.restricted) {
-            if (!restrictedUser !== userId){
+            if (restrictedUser !== userId){
                 Object.assign(unrestritedData, this.restricted[restrictedUser]);
             }
         }
+
+        return unrestritedData;
     },
     isParticipant (user) {
         let userId = user.id ? user.id : user;
-
-        return this.activeUsers.some( (thisUser) => { thisUser.id == userId });
+        return this.activeUsers.some( (thisUser) => thisUser.id == userId );
     },
     addUserTag (user, tag) {
         this.setUserTags(user, {[tag]: true});
